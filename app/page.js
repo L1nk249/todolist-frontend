@@ -89,7 +89,7 @@ return (
                   <Grid item xs={3}>
                     <TextField
                       id="outlined-basic"
-                      label="TODO"
+                      placeholder='Ecrivez votre Todo'
                       variant="outlined"
                       fullWidth
                       sx={{ 
@@ -118,15 +118,28 @@ return (
                     <ul style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 0 }}>
                       {todos.map((todo, index) => (
                           <li key={index} style={{ display: 'flex', alignItems: 'center', fontSize: '2rem', margin: '10px 0', color: 'blaxk' }}> 
-                          <NoteAltIcon fontSize="small"sx={{ color: 'rgb(24,118,210)',marginRight: '20px' }}/>{todo}
-                          <Button
-                            aria-label="delete"
-                            onClick={() => handleDelete(index)}
-                            sx={{ marginLeft: '40px' }}
-                        
-                          >
-                            <DeleteForeverIcon fontSize="large"sx={{ color: 'red'}}  />
-                          </Button>
+                           <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          backgroundColor: "#f0f0f0", // Fond gris clair
+                          color: "#333", // Couleur du texte
+                          padding: "10px 20px",
+                          borderRadius: "25px", // Bordure arrondie pour effet capsule
+                          fontSize: "1.5rem",
+                          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // Légère ombre pour un effet de relief
+                          minWidth: "300px", // Largeur minimum pour la capsule
+                          maxWidth: "400px", // Largeur maximum
+                          width: "100%", // Ajuste la largeur au contenu
+                        }}
+                      >
+                        <NoteAltIcon fontSize="small" sx={{ color: "rgb(24,118,210)", marginRight: "10px" }} />
+                        {todo}
+                        <Button aria-label="delete" onClick={() => handleDelete(index)} sx={{ marginLeft: "20px" }}>
+                          <DeleteForeverIcon fontSize="large" sx={{ color: "red" }} />
+                        </Button>
+                      </Box>
                         </li>
                       ))}
                     </ul>
