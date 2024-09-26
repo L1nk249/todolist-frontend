@@ -4,24 +4,47 @@ import { Box, TextField, Button, Grid } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify"; 
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
   const [todo, setTodo] = useState("");
 
   const handleAdd = () => {
-    if (todo.trim() === '') return
-    if (todos.includes(todo)) 
-        return alert ("Todo déja renseigné");
+    if (todo.trim() === '') {
+      toast.error("Le champ TODO ne peut pas être vide!", {
+        position: "center",
+        autoClose: 2000,
+        hideProgressBar: true,
+      });
+      return;
+    }
+    
+    if (todos.includes(todo)) {
+      toast.warning("Ce ToDo existe déjà!", {
+        position: "center",
+        autoClose: 2000,
+        hideProgressBar: true,
+      });
+      return;
+    }
+
     setTodos((prev) => [...prev, todo]);
     setTodo("");
+
   };
+
   const handleDelete = (index) => {
     setTodos((prev) => prev.filter((_, i) => i !== index));
+    toast.info("Todo supprimé.", {
+        position: "center",
+        autoClose: 2000,})
   };
 
 return (
         <>
+          <ToastContainer />
          <div
       style={{
         height: '100vh', // hauteur de la fenêtre
@@ -81,11 +104,13 @@ return (
                       Ajouter un ToDo
                     </Button>
                   </Grid>
+                  <ToastContainer />
+
                   <Grid item xs={12}>
                     <ul style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 0 }}>
                       {todos.map((todo, index) => (
                           <li key={index} style={{ display: 'flex', alignItems: 'center', fontSize: '2rem', margin: '10px 0', color: 'blaxk' }}> 
-                          <NoteAltIcon fontSize="large"sx={{ color: 'rgb(24,118,210)',marginRight: '20px' }}/>{todo}
+                          <NoteAltIcon fontSize="small"sx={{ color: 'rgb(24,118,210)',marginRight: '20px' }}/>{todo}
                           <Button
                             aria-label="delete"
                             onClick={() => handleDelete(index)}
@@ -99,9 +124,9 @@ return (
                     </ul>
                   </Grid>
                 </Grid>
-              </Box> {/* Cette balise Box était manquante */}
+              </Box> 
             </Grid>
           </Grid>
         </>
       );
-    }
+  }
