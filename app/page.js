@@ -13,7 +13,13 @@ export default function Home() {
 
   const handleAdd = () => {
     if (todo.trim() === '') {
-      toast.error("Le champ TODO ne peut pas être vide!", {
+      toast.error("Le ToDo ne peut pas être vide!", {
+        style: { 
+            fontSize: '2rem',  // Double la taille de la police
+            padding: '20px',   // Ajoute plus de padding pour rendre la bulle plus grande
+            transform: 'scale(1)', 
+            transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
+          },
         position: "center",
         autoClose: 2000,
         hideProgressBar: true,
@@ -23,6 +29,12 @@ export default function Home() {
     
     if (todos.includes(todo)) {
       toast.warning("Ce ToDo existe déjà!", {
+        style: { 
+            fontSize: '2rem',  // Double la taille de la police
+            padding: '20px',   // Ajoute plus de padding pour rendre la bulle plus grande
+            transform: 'scale(1)', 
+            transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
+          },
         position: "center",
         autoClose: 2000,
         hideProgressBar: true,
@@ -30,8 +42,14 @@ export default function Home() {
       return;
     }
 
-if (todos.length>10){
+if (todos.length>8){
     toast.info("Limite atteinte, connectez vous pour poursuivre",{
+        style: { 
+            fontSize: '2rem',  // Double la taille de la police
+            padding: '20px',   // Ajoute plus de padding pour rendre la bulle plus grande
+            transform: 'scale(1)', 
+            transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
+          },
 position: "center",
         autoClose: 2000,
     })
