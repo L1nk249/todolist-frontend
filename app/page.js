@@ -30,6 +30,14 @@ export default function Home() {
       return;
     }
 
+if (todos.length>10){
+    toast.info("Limite atteinte, connectez vous pour poursuivre",{
+position: "center",
+        autoClose: 2000,
+    })
+return
+}
+
     setTodos((prev) => [...prev, todo]);
     setTodo("");
 
