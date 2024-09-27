@@ -42,8 +42,8 @@ export default function Home() {
       return;
     }
 
-if (todos.length>8){
-    toast.info("Limite atteinte, connectez vous pour poursuivre",{
+   todos.length>8
+    ?toast.info("Limite atteinte, connectez vous pour poursuivre",{
         style: { 
             fontSize: '2rem',  // Double la taille de la police
             padding: '20px',   // Ajoute plus de padding pour rendre la bulle plus grande
@@ -53,10 +53,7 @@ if (todos.length>8){
 position: "center",
         autoClose: 2000,
     })
-return
-}
-
-    setTodos((prev) => [...prev, todo]);
+    :setTodos((prev) => [...prev, todo]);
     setTodo("");
 
   };
