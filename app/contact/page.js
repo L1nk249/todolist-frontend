@@ -3,6 +3,10 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify"; 
+import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/navigation';
+
 
 export default function ContactPage() {
   const [form, setForm] = useState({
@@ -10,7 +14,7 @@ export default function ContactPage() {
     email: "",
     message: ""
   });
-
+  const router = useRouter()
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({
@@ -18,13 +22,21 @@ export default function ContactPage() {
       [name]: value,
     }));
   };
-
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Logique d'envoi du formulaire ici (API, Email service...)
-    console.log("Formulaire envoyé:", form);
-    alert("Message envoyé avec succès!");
-  };
+  
+    toast.info("Message envoyé avec succès!",{
+      style: { 
+          fontSize: '1.5rem',  // Double la taille de la police
+          padding: '20px',   // Ajoute plus de padding pour rendre la bulle plus grande
+          transform: 'scale(1)', 
+          transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
+}}) 
+setTimeout(() => {
+  router.push("/"); // Redirection vers la page d'accueil
+}, 3000); // 3 secondes pour permettre à l'utilisateur de voir le message
+};
 
   return (
     <Box
@@ -93,9 +105,20 @@ export default function ContactPage() {
             fullWidth
           >
             Envoyer
+            
           </Button>
         </Grid>
       </Grid>
+      <ToastContainer
+            position="top-center" // Positionnez le toast en haut et au centre
+            autoClose={3000} // Ferme automatiquement après 3 secondes
+            hideProgressBar={true} // Masque la barre de progression
+            closeOnClick // Ferme le toast au clic
+            pauseOnHover // Met en pause l'auto-fermeture au survol
+            draggable // Permet le glissement
+            pauseOnFocusLoss // Met en pause l'auto-fermeture si le toast perd le focus
+            theme="light" // Choisissez un thème (light ou dark)
+            />
     </Box>
   );
 }
