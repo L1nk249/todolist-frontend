@@ -29,7 +29,7 @@ export default function Footer() {
   }}
 >
   {/* Aligné à gauche */}
-  <Typography variant="body1" sx={{ textAlign: "left", flex: 1,ml:10 }}>
+  <Typography variant="body1" sx={{ textAlign: "left", flex: 1,ml:10, fontSize: '1.5rem', }}>
     © 2023 ToutDoux. Tous droits réservés.
   </Typography>
   <Typography variant="body2" sx={{ textAlign: "center", flex: 1 }}>
@@ -42,7 +42,7 @@ export default function Footer() {
     <Typography
       component="span" // Utiliser un span pour appliquer les styles
       sx={{
-        fontSize: 'large',
+        fontSize: '1.5rem',
         color: 'black',
         display: 'inline-block',
         transition: 'color 0.3s ease', // Pour une transition douce
@@ -56,13 +56,13 @@ export default function Footer() {
   </Link>
 </Typography>
   {/* Centré */}
-  <Typography variant="body2" sx={{ textAlign: "center", flex: 1 }}>
+  <Typography variant="body2" sx={{ textAlign: "center", flex: 1, }}>
     <MuiLink
       href="https://cedriclevyportfolio.vercel.app/"
       target="_blank"
       rel="noopener noreferrer"
       sx={{
-        fontSize: 'large',
+        fontSize: '1.5rem',
         color: 'black',
         textDecoration: 'none',
         display: 'inline-block',

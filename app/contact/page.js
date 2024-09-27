@@ -43,6 +43,7 @@ setTimeout(() => {
       component="form"
       onSubmit={handleSubmit}
       sx={{
+        marginTop:"120px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -53,7 +54,7 @@ setTimeout(() => {
         zIndex: 1
       }}
     >
-      <Typography variant="h4" gutterBottomsx={{ marginTop: "80px" }}>
+      <Typography variant="h4" gutterBottomsx sx={{ fontSize: '4rem', }}>
         Me contacter
       </Typography>
 

@@ -123,7 +123,7 @@ return (
                       Ajouter un ToDo
                     </Button>
                   </Grid>
-                  <ToastContainer />
+                
 
                   <Grid item xs={12}>
                     <ul style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 0 }}>

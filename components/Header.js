@@ -49,13 +49,13 @@ export default function Header() {
              ></Image>
             </Grid>
 
-            <Typography variant="body1" sx={{ textAlign: "left", flex: 1,ml:10 }}>
+            <Typography variant="body1" sx={{ textAlign: "left", flex: 1,mr: 50  }}>
                <Link href="/" > 
     
                <Typography 
               component="span" 
               sx={{
-                fontSize: 'large',
+                fontSize: '1.5rem',
                 color: 'black',
                 textDecoration: 'none',
                 display: 'inline-block',
@@ -69,12 +69,14 @@ export default function Header() {
             </Typography>
           </Link>
         </Typography>
+
+
   <Typography variant="body2" sx={{ textAlign: "center", flex: 1 }}>
- 
+   <Link href="/connexion" > 
     <Typography
       component="span" // Utiliser un span pour appliquer les styles
       sx={{
-        fontSize: 'large',
+        fontSize: '1.5rem',
         color: 'black',
         display: 'inline-block',
         transition: 'color 0.3s ease', // Pour une transition douce
@@ -85,16 +87,15 @@ export default function Header() {
     >
       Se connecter
     </Typography>
-  
+    </Link>
 </Typography>
   {/* Centré */}
   <Typography variant="body2" sx={{ textAlign: "center", flex: 1 }}>
-    <MuiLink
-      href="https://cedriclevyportfolio.vercel.app/"
-      target="_blank"
-      rel="noopener noreferrer"
+  <Link href="/inscription" > 
+    <Typography
+      component="span"
       sx={{
-        fontSize: 'large',
+        fontSize: '1.5rem',
         color: 'black',
         textDecoration: 'none',
         display: 'inline-block',
@@ -103,9 +104,10 @@ export default function Header() {
         },
       }}
     >
-     S'inscire 
-    </MuiLink>
+     S'inscrire 
   </Typography>
+    </Link>
+    </Typography>
       </Box>
       </>
     );

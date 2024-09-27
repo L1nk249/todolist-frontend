@@ -1,5 +1,4 @@
-import Connexion from '../components/Connexion';
-
+import Connexion from '../../components/Connexion'
 
 const ConnexionPage = () => {
   return (

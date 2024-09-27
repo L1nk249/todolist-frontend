@@ -1,5 +1,4 @@
-
-import Inscription from '../components/Inscription';
+import Inscription from '../../components/Inscription'
 
 
 const InscriptionPage = () => {
