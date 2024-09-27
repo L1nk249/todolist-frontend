@@ -1,10 +1,16 @@
-
+"use client";
 import { Box, Typography,Grid, Link as MuiLink } from "@mui/material";
-import Link from "next/link"
 import Image from "next/image";
+import { useRouter } from 'next/navigation';
+import Link from "next/link"
 
 
 export default function Header() {
+  const router = useRouter()
+ 
+  const handleClick = () => {
+    router.push("/");}
+
     return (
       <>
       <Box
@@ -24,6 +30,7 @@ export default function Header() {
         justifyContent: "space-between", // Distribue les éléments à gauche, centre et droite
         alignItems: "center", // Centre verticalement
         minHeight: "50px",
+        cursor: 'pointer'
       }}
       
       >
@@ -37,11 +44,68 @@ export default function Header() {
                     borderRadius:"30%",
                   objectFit: 'contain' ,
                   marginBottom: "20px", // Ajuste l'espace sous l'image
-
                 }}
+                onClick={handleClick}
              ></Image>
             </Grid>
-            
+
+            <Typography variant="body1" sx={{ textAlign: "left", flex: 1,ml:10 }}>
+               <Link href="/" > 
+    
+               <Typography 
+              component="span" 
+              sx={{
+                fontSize: 'large',
+                color: 'black',
+                textDecoration: 'none',
+                display: 'inline-block',
+                transition: 'color 0.3s ease',
+                '&:hover': {
+                  color: 'white',
+                },
+              }}
+            >
+              Accueil
+            </Typography>
+          </Link>
+        </Typography>
+  <Typography variant="body2" sx={{ textAlign: "center", flex: 1 }}>
+ 
+    <Typography
+      component="span" // Utiliser un span pour appliquer les styles
+      sx={{
+        fontSize: 'large',
+        color: 'black',
+        display: 'inline-block',
+        transition: 'color 0.3s ease', // Pour une transition douce
+        '&:hover': {
+          color: 'white', // Change la couleur au survol
+        },
+      }}
+    >
+      Se connecter
+    </Typography>
+  
+</Typography>
+  {/* Centré */}
+  <Typography variant="body2" sx={{ textAlign: "center", flex: 1 }}>
+    <MuiLink
+      href="https://cedriclevyportfolio.vercel.app/"
+      target="_blank"
+      rel="noopener noreferrer"
+      sx={{
+        fontSize: 'large',
+        color: 'black',
+        textDecoration: 'none',
+        display: 'inline-block',
+        '&:hover': {
+          color: 'white'
+        },
+      }}
+    >
+     S'inscire 
+    </MuiLink>
+  </Typography>
       </Box>
       </>
     );

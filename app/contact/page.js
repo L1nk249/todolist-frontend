@@ -49,10 +49,11 @@ setTimeout(() => {
         justifyContent: "center",
         minHeight: "100vh",
         padding: 4,
-        backgroundColor: "#f5f5f5"
+        backgroundColor: "#f5f5f5",
+        zIndex: 1
       }}
     >
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottomsx={{ marginTop: "80px" }}>
         Me contacter
       </Typography>
 
