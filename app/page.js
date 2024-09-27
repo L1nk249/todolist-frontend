@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { Box, TextField, Button, Grid } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
@@ -42,7 +41,7 @@ export default function Home() {
       return;
     }
 
-   todos.length>8
+   todos.length>9
     ?toast.info("Limite atteinte, connectez vous pour poursuivre",{
         style: { 
             fontSize: '2rem',  // Double la taille de la police
@@ -71,9 +70,14 @@ return (
          <div
       style={{
         height: '100vh', // hauteur de la fenêtre
+        position: 'fixed', // Permet à l'image de rester fixe
+        top: 0,
+        left: 0,
         backgroundImage: 'url(/background.jpeg)', // chemin relatif à l'image
         backgroundSize: 'cover', // couvre toute la zone
+        backgroundAttachment: 'fixed',
         backgroundPosition: 'center', // centre l'image
+        minHeight: '100vh',
         position: 'absolute', // permet de superposer avec le contenu
         width: '100%', // prend toute la largeur
         zIndex: -1, // met l'image en arrière-plan
@@ -81,22 +85,14 @@ return (
     >
       
     </div>
-          <Grid container justifyContent="center" alignItems="center" spacing={2} style={{ padding: '20px 0' }}>
-            <Grid item xs={12} sm={6} container justifyContent="center"> {/* Image will take full width on extra-small screens and half width on small screens */}
-              <Image
-                src="/toutdoux.jpeg"   
-                alt="logo" 
-                width={200} 
-                height={100}  
-                style={{
-                      width: '150px',
-                    borderRadius:"30%",
-                  maxWidth: '100%', 
-                  height: 'auto',  
-                  objectFit: 'contain' ,
-                  marginBottom:'80px'
-                }}
-              />
+
+
+
+
+    
+          <Grid container justifyContent="center" alignItems="center" spacing={2} style={{ padding: '20px 0',marginTop:'175px' }}>
+           
+            
             </Grid>
             <Grid item xs={12}>
               <Box>
@@ -144,8 +140,8 @@ return (
                           borderRadius: "25px", // Bordure arrondie pour effet capsule
                           fontSize: "1.5rem",
                           boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // Légère ombre pour un effet de relief
-                          minWidth: "300px", // Largeur minimum pour la capsule
-                          maxWidth: "400px", // Largeur maximum
+                          minWidth: "800px", // Largeur minimum pour la capsule
+                          maxWidth: "800px", // Largeur maximum
                           width: "100%", // Ajuste la largeur au contenu
                         }}
                       >
@@ -162,7 +158,7 @@ return (
                 </Grid>
               </Box> 
             </Grid>
-          </Grid>
+          
         </>
       );
   }

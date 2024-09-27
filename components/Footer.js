@@ -51,7 +51,7 @@ export default function Footer() {
         },
       }}
     >
-      Nous contacter
+      Me contacter
     </Typography>
   </Link>
 </Typography>

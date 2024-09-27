@@ -53,7 +53,7 @@ setTimeout(() => {
       }}
     >
       <Typography variant="h4" gutterBottom>
-        Contactez-nous
+        Me contacter
       </Typography>
 
       <Grid container spacing={2} sx={{ maxWidth: 600, margin: "auto" }}>
