@@ -1,10 +1,12 @@
 "use client"; // Assurez-vous d'ajouter cette ligne si vous utilisez Next.js avec des composants côté client
 
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography,IconButton,InputAdornment } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from "react-toastify"; 
 import 'react-toastify/dist/ReactToastify.css';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const Inscription = () => {
   const [name, setName] = useState("");
@@ -17,12 +19,12 @@ const Inscription = () => {
   const router = useRouter();
   const toggleShowPassword = () => {
     // Pour afficher où non le mot de passe
-    setShowPassword(!showPassword);
+    setShowPassword((prev) => !prev);
   };
 
   const toggleShowConfirmPassword = () => {
     // Pour afficher ou non la confirmation de  mot de passe
-    setShowConfirmPassword(!showConfirmPassword);
+    setShowConfirmPassword((prev) => !prev);
   };
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // regex pour valider le mail 
       
@@ -133,26 +135,50 @@ const Inscription = () => {
         required
         sx={{ marginBottom: 2,height:"05vh", width:"15vW " }}
       />
-      <TextField
-        fullWidth
-        label="Mot de passe"
-        type="password"
-        variant="outlined"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-        sx={{ marginBottom: 2,height:"05vh", width:"15vW " }}
-      />
-      <TextField
-        fullWidth
-        label="Confirmation du mot de passe"
-        type="password"
-        variant="outlined"
-        value={confirmPassword}
-        onChange={(e) => setconfirmPassword(e.target.value)}
-        required
-        sx={{ marginBottom: 2,height:"05vh", width:"15vW " }}
-      />
+      <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2, width: '15vW' }}>
+        <TextField
+          fullWidth
+          label="Mot de passe"
+          type={showPassword ? "text" : "password"}  // Affichage conditionnel du mot de passe
+          variant="outlined"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+      
+          sx={{ marginBottom: 2, height: "05vh", width: "15vW" }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={toggleShowPassword}>
+                  {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Box>
+
+      <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2, width: '15vW' }}>
+        <TextField
+          fullWidth
+          label="Confirmation du mot de passe"
+          type={showConfirmPassword ? "text" : "password"}  // Affichage conditionnel du mot de passe
+          variant="outlined"
+          value={confirmPassword}
+          onChange={(e) => setconfirmPassword(e.target.value)}
+          required
+          sx={{ height: "05vh" }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={toggleShowConfirmPassword}>
+                  {showConfirmPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Box>
       <Button type="submit" variant="contained" color="primary" sx={{height:"05vh", width:"15vW ",marginTop:"20px"}}>
         Inscription
       </Button>
