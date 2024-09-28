@@ -2,27 +2,36 @@
 
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
-import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, Typography } from '@mui/material';
+import { Box,Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, Typography } from '@mui/material';
+import ForgottenPassword from "./ForgottenPassword";
 
 
 const Connexion = ({ open, onClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showForgottenPassword, setShowForgottenPassword] = useState(false)
+
   const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Logique d'authentification ici
     // Exemple de redirection après connexion
+    onClose();
     router.push("/"); // Redirection vers la page d'accueil après connexion
   };
 
   const handleForgotPasswordClick = () => {
-    router.push("/")
-  }
+    setShowForgottenPassword(true); // Affiche le composant ForgottenPassword
+  };
+
+  const handleCloseForgottenPassword = () => {
+    setShowForgottenPassword(false); // Ferme le composant ForgottenPassword
+  };
   
     return (
       <Dialog open={open} onClose={onClose}>
+       <Box sx={{ padding: 3, minWidth: 400 }}>
         <DialogTitle >Connexion</DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit}>
@@ -56,8 +65,15 @@ const Connexion = ({ open, onClose }) => {
               }}
             />
             
-          <Button onClick={handleForgotPasswordClick} color="primary">
-           Mot de passe oublié
+          <Button onClick={handleForgotPasswordClick} color="primary"
+          sx={{
+            '&:hover': {
+              fontWeight: 'bold', // Mettre en gras au survol
+            },
+          }}
+        >
+           Mot de passe oublié ?
+          
           </Button>
          
           </form>
@@ -65,14 +81,28 @@ const Connexion = ({ open, onClose }) => {
         <DialogActions>
          
 
-          <Button onClick={()=>{onClose();router.push('/')}} color="primary">
+          <Button onClick={()=>{onClose();router.push('/')}} color="primary"
+          sx={{
+            '&:hover': {
+              fontWeight: 'bold', // Mettre en gras au survol
+            },
+          }}
+        >
             Annuler
           </Button>
         
-          <Button type="submit" color="primary" onClick={handleSubmit}>
+          <Button type="submit" color="primary" onClick={handleSubmit}
+
+          sx={{
+                '&:hover': {
+                  fontWeight: 'bold', // Mettre en gras au survol
+                },
+              }}
+            >
             Se connecter
-          </Button>
+          </Button> 
         </DialogActions>
+        </Box>
       </Dialog>
     );
   };

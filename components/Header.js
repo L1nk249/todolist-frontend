@@ -100,7 +100,7 @@ export default function Header() {
       }}
     onClick={handleOpen}>
       Se connecter
-    <Connexion open={open} onClose={handleClose} />
+  
     </Typography>
     </Link>
 </Typography>
@@ -124,6 +124,7 @@ export default function Header() {
     </Link>
     </Typography>
       </Box>
+      <Connexion open={open} onClose={handleClose} />
       </>
     );
   }
