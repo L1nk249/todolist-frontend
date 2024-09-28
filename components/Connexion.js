@@ -17,12 +17,13 @@ const Connexion = ({ open, onClose }) => {
     router.push("/"); // Redirection vers la page d'accueil après connexion
   };
 
-  
-
+  const handleForgotPasswordClick = () => {
+    router.push("/")
+  }
   
     return (
       <Dialog open={open} onClose={onClose}>
-        <DialogTitle>Connexion</DialogTitle>
+        <DialogTitle >Connexion</DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit}>
             <TextField
@@ -35,6 +36,10 @@ const Connexion = ({ open, onClose }) => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              sx={{ 
+                mb: 2, // Marge en bas pour espacer les champs
+                '& .MuiInputBase-input': { fontSize: '1.5rem' }, // Taille de la police d'entrée
+              }}
             />
             <TextField
               margin="dense"
@@ -45,16 +50,25 @@ const Connexion = ({ open, onClose }) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              sx={{ 
+                mb: 2,
+                '& .MuiInputBase-input': { fontSize: '1.5rem' },
+              }}
             />
-            <Typography variant="body2" sx={{ marginTop: 2 }}>
-              Mot de passe oublié ?
-            </Typography>
+            
+          <Button onClick={handleForgotPasswordClick} color="primary">
+           Mot de passe oublié
+          </Button>
+         
           </form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose} color="primary">
+         
+
+          <Button onClick={()=>{onClose();router.push('/')}} color="primary">
             Annuler
           </Button>
+        
           <Button type="submit" color="primary" onClick={handleSubmit}>
             Se connecter
           </Button>
