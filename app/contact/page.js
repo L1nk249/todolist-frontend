@@ -54,11 +54,11 @@ setTimeout(() => {
         zIndex: 1
       }}
     >
-      <Typography variant="h4" gutterBottomsx sx={{ fontSize: '4rem', }}>
+      <Typography variant="h4" gutterBottomsx sx={{ fontSize: '4rem',marginTop:"20px" }}>
         Me contacter
       </Typography>
 
-      <Grid container spacing={2} sx={{ maxWidth: 600, margin: "auto" }}>
+      <Grid container spacing={2} sx={{ maxWidth: 600, margin: "auto",marginTop:"60px" }}>
         <Grid item xs={12}>
           <TextField
             fullWidth
