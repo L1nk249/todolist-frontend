@@ -6,9 +6,13 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify"; 
 import 'react-toastify/dist/ReactToastify.css';
 
+
+
 export default function Home() {
   const [todos, setTodos] = useState([]);
   const [todo, setTodo] = useState("");
+
+  
 
   const handleAdd = () => {
     if (todo.trim() === '') {
@@ -66,7 +70,9 @@ position: "center",
 
 return (
         <>
-          <ToastContainer />
+       
+    <ToastContainer />
+
          <div
       style={{
         height: '100vh', // hauteur de la fenêtre
@@ -151,6 +157,7 @@ return (
                           <DeleteForeverIcon fontSize="large" sx={{ color: "red" }} />
                         </Button>
                       </Box>
+                      
                         </li>
                       ))}
                     </ul>

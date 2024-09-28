@@ -1,13 +1,27 @@
 "use client";
-import { Box, Typography,Grid, Link as MuiLink } from "@mui/material";
+import { Box, Typography,Grid, } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
 import Link from "next/link"
+import Connexion from '../components/Connexion'
+import { useState } from "react";
 
 
 export default function Header() {
   const router = useRouter()
  
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
+
   const handleClick = () => {
     router.push("/");}
 
@@ -84,8 +98,9 @@ export default function Header() {
           color: 'white', // Change la couleur au survol
         },
       }}
-    >
+    onClick={handleOpen}>
       Se connecter
+    <Connexion open={open} onClose={handleClose} />
     </Typography>
     </Link>
 </Typography>
