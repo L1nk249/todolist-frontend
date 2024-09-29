@@ -73,7 +73,7 @@ position: "center",
   };
 return (
         <>
-        <Connexion open={openModal} onclose={closeModal} />
+        <Connexion open={openModal} onClose={closeModal} />
     <ToastContainer />
 
          <div

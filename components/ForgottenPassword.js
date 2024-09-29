@@ -59,11 +59,83 @@ import 'react-toastify/dist/ReactToastify.css';
         
           return (
            
-        <div  sx={{color:'yellow'}}>
-        <h1>"Hello World"</h1>
+            <Dialog open={open} onClose={onClose}>
+            <Box sx={{ padding: 3, minWidth: 400 }}>
+             <DialogTitle >Connexion</DialogTitle>
+             <DialogContent>
+               <form onSubmit={handleSubmit}>
+                 <TextField
+                   autoFocus
+                   margin="dense"
+                   label="Email"
+                   type="email"
+                   fullWidth
+                   variant="outlined"
+                   value={email}
+                   onChange={(e) => setEmail(e.target.value)}
+                   required
+                   sx={{ 
+                     mb: 2, // Marge en bas pour espacer les champs
+                     '& .MuiInputBase-input': { fontSize: '1.5rem' }, // Taille de la police d'entrée
+                   }}
+                 />
+                 <TextField
+                   margin="dense"
+                   label="Mot de passe"
+                   type="password"
+                   fullWidth
+                   variant="outlined"
+                   value={password}
+                   onChange={(e) => setPassword(e.target.value)}
+                   required
+                   sx={{ 
+                     mb: 2,
+                     '& .MuiInputBase-input': { fontSize: '1.5rem' },
+                   }}
+                 />
+                 
+               <Button onClick={handleForgotPasswordClick} color="primary"
+               sx={{
+                 '&:hover': {
+                   fontWeight: 'bold', // Mettre en gras au survol
+                 },
+               }}
+             >
+                Mot de passe oublié ?
+               
+               </Button>
+             
+               </form>
+             </DialogContent>
+             <DialogActions>
+              
+     
+               <Button onClick={()=>{onClose();router.push('/')}} color="primary"
+               sx={{
+                 '&:hover': {
+                   fontWeight: 'bold', // Mettre en gras au survol
+                 },
+               }}
+             >
+                 Annuler
+               </Button>
+             
+               <Button type="submit" color="primary" onClick={handleSubmit}
+     
+               sx={{
+                     '&:hover': {
+                       fontWeight: 'bold', // Mettre en gras au survol
+                     },
+                   }}
+                 >
+                 Se connecter
+               </Button> 
+             </DialogActions>
+             </Box>
+           </Dialog>
+         );
+       };
        
-        </div>
-          );
-        }
+     
       
 export default ForgottenPassword
