@@ -75,7 +75,7 @@ const Connexion = ({ open, onClose }) => {
            Mot de passe oublié ?
           
           </Button>
-         
+          <ForgottenPassword onClose={handleCloseForgottenPassword} />
           </form>
         </DialogContent>
         <DialogActions>

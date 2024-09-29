@@ -5,14 +5,12 @@ import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify"; 
 import 'react-toastify/dist/ReactToastify.css';
-
-
+import Connexion from '../components/Connexion'
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
   const [todo, setTodo] = useState("");
-
-  
+  const [openModal, setOpenModal] = useState(false); // Gérer la visibilité de la modale (Connexion)
 
   const handleAdd = () => {
     if (todo.trim() === '') {
@@ -45,8 +43,8 @@ export default function Home() {
       return;
     }
 
-   todos.length>9
-    ?toast.info("Limite atteinte, connectez vous pour poursuivre",{
+   if (todos.length>9){
+    toast.info("Limite atteinte, connectez vous pour poursuivre",{
         style: { 
             fontSize: '2rem',  // Double la taille de la police
             padding: '20px',   // Ajoute plus de padding pour rendre la bulle plus grande
@@ -56,8 +54,11 @@ export default function Home() {
 position: "center",
         autoClose: 2000,
     })
-    :setTodos((prev) => [...prev, todo]);
-    setTodo("");
+    setTimeout(() => {
+      setOpenModal(true)
+    }, 2000);
+   } else {setTodos((prev) => [...prev, todo]);
+    setTodo("");}
 
   };
 
@@ -67,10 +68,12 @@ position: "center",
         position: "center",
         autoClose: 2000,})
   };
-
+  const closeModal = () => {
+    setOpenModal(false); // Function to close the modal
+  };
 return (
         <>
-       
+        <Connexion open={openModal} onclose={closeModal} />
     <ToastContainer />
 
          <div
