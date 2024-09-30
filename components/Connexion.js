@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
-import { Box,Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, Typography } from '@mui/material';
+import { Box,Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button} from '@mui/material';
 import ForgottenPassword from "./ForgottenPassword";
 
 
@@ -30,6 +30,7 @@ const Connexion = ({ open, onClose }) => {
   };
   
     return (
+      <>
       <Dialog open={open} onClose={onClose}>
        <Box sx={{ padding: 3, minWidth: 400 }}>
         <DialogTitle >Connexion</DialogTitle>
@@ -104,6 +105,8 @@ const Connexion = ({ open, onClose }) => {
         </DialogActions>
         </Box>
       </Dialog>
+      <ForgottenPassword open={showForgottenPassword} onClose={handleCloseForgottenPassword} />
+      </>
     );
   };
   
