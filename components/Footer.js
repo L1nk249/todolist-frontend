@@ -13,7 +13,7 @@ export default function Footer() {
     py: 3,
     px: 2,
     mt: "auto",
-    background: " linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);",
+    background: "linear-gradient(to right top, #d1c26b, #d6c370, #dac575, #dec67a, #e2c87f, #e5c67d, #e8c37b, #ebc179, #efba71, #f3b269, #f7aa64, #fba15f);",
     textAlign: "center",
     position: "fixed", // Position fixe
     bottom: 0, // Aligné en bas
@@ -24,6 +24,7 @@ export default function Footer() {
     justifyContent: "space-between", // Distribue les éléments à gauche, centre et droite
     alignItems: "center", // Centre verticalement
     minHeight: "50px",
+    opacity:0.8
    
   
   }}

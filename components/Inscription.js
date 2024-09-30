@@ -44,7 +44,7 @@ const Inscription = () => {
             transform: 'scale(1)', 
             transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
           },
-        position: "center",
+        position: " bottom-center",
         autoClose: 2000,
         hideProgressBar: true,
       });
@@ -59,7 +59,7 @@ const Inscription = () => {
             transform: 'scale(1)', 
             transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
           },
-        position: "center",
+        position: "bottom-center",
         autoClose: 2000,
         hideProgressBar: true,
       });
@@ -74,7 +74,7 @@ const Inscription = () => {
             transform: 'scale(1)', 
             transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
           },
-        position: "center",
+        position:  "bottom-center",
         autoClose: 2000,
         hideProgressBar: true,
       });
@@ -87,7 +87,7 @@ const Inscription = () => {
         transform: 'scale(1)', 
         transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
       },
-    position: "center",
+    position:  "bottom-center",
     autoClose: 2000,
     hideProgressBar: true,
   });

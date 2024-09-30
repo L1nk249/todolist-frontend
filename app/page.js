@@ -21,7 +21,7 @@ export default function Home() {
             transform: 'scale(1)', 
             transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
           },
-        position: "center",
+        position: "bottom-center",
         autoClose: 2000,
         hideProgressBar: true,
       });
@@ -36,7 +36,7 @@ export default function Home() {
             transform: 'scale(1)', 
             transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
           },
-        position: "center",
+        position: " bottom-center",
         autoClose: 2000,
         hideProgressBar: true,
       });
@@ -51,7 +51,7 @@ export default function Home() {
             transform: 'scale(1)', 
             transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
           },
-position: "center",
+position: "bottom-center",
         autoClose: 2000,
     })
     setTimeout(() => {
@@ -65,7 +65,7 @@ position: "center",
   const handleDelete = (index) => {
     setTodos((prev) => prev.filter((_, i) => i !== index));
     toast.info("Todo supprimé.", {
-        position: "center",
+        position:  "bottom-center",
         autoClose: 2000,})
   };
   const closeModal = () => {
@@ -82,7 +82,7 @@ return (
         position: 'fixed', // Permet à l'image de rester fixe
         top: 0,
         left: 0,
-        backgroundImage: 'url(/background.jpeg)', // chemin relatif à l'image
+        backgroundImage: 'url(/todobis.jpeg)', // chemin relatif à l'image
         backgroundSize: 'cover', // couvre toute la zone
         backgroundAttachment: 'fixed',
         backgroundPosition: 'center', // centre l'image
@@ -99,14 +99,14 @@ return (
 
 
     
-          <Grid container justifyContent="center" alignItems="center" spacing={2} style={{ padding: '20px 0',marginTop:'175px' }}>
+          <Grid container justifyContent="center" alignItems="center" spacing={2} style={{ padding: '20px 0',marginTop:'165px' }}>
            
             
             </Grid>
             <Grid item xs={12}>
               <Box>
                 <Grid container justifyContent="center" alignItems="center"spacing={2}>
-                  <Grid item xs={3}>
+                  <Grid item xs={2}>
                     <TextField
                       id="outlined-basic"
                       placeholder='Ecrivez votre Todo'
@@ -117,16 +117,17 @@ return (
                         '& .MuiFormLabel-root': { fontSize: '1.25rem' }, // Taille de l'étiquette
                         '& .MuiInputBase-root': {
                           backgroundColor: "white", // Appliquer la même couleur à l'arrière-plan de l'entrée
+                           height: "56px"
                       }}}
                       value={todo}
                       onChange={(e) => setTodo(e.target.value)}
                     />
                   </Grid>
-                  <Grid item xs={3}>
+                  <Grid item xs={2}>
                     <Button
                       variant="contained"
                       fullWidth
-                      sx={{ height: "100%",fontSize: "1.5rem"  }}
+                      sx={{  height: "56px",fontSize: "1.5rem"  }}
                       onClick={handleAdd}
                     >
                       Ajouter un ToDo
@@ -137,13 +138,13 @@ return (
                   <Grid item xs={12}>
                     <ul style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 0 }}>
                       {todos.map((todo, index) => (
-                          <li key={index} style={{ display: 'flex', alignItems: 'center', fontSize: '2rem', margin: '10px 0', color: 'blaxk' }}> 
+                          <li key={index} style={{ display: 'flex', alignItems: 'center', fontSize: '2rem', margin: '10px 0', color: 'black' }}> 
                            <Box
                         sx={{
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "space-between",
-                          backgroundColor: "#f0f0f0", // Fond gris clair
+                          background: "linear-gradient(to right top, #d1c26b, #d6c370, #dac575, #dec67a, #e2c87f, #e5c67d, #e8c37b, #ebc179, #efba71, #f3b269, #f7aa64, #fba15f)",
                           color: "#333", // Couleur du texte
                           padding: "10px 20px",
                           borderRadius: "25px", // Bordure arrondie pour effet capsule
