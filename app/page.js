@@ -116,7 +116,7 @@ return (
                         '& .MuiInputBase-input': { fontSize: '1.5rem' }, // Taille de la police
                         '& .MuiFormLabel-root': { fontSize: '1.25rem' }, // Taille de l'étiquette
                         '& .MuiInputBase-root': {
-                          backgroundColor: "white", // Appliquer la même couleur à l'arrière-plan de l'entrée
+                          backgroundColor: "white", 
                            height: "56px"
                       }}}
                       value={todo}
