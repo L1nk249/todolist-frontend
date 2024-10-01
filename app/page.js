@@ -44,7 +44,7 @@ export default function Home() {
     }
 
    if (todos.length>9){
-    toast.info("Limite atteinte, connectez vous pour poursuivre",{
+    toast.info("Limite atteinte, Connectez vous pour poursuivre",{
         style: { 
             fontSize: '2rem',  // Double la taille de la police
             padding: '20px',   // Ajoute plus de padding pour rendre la bulle plus grande
