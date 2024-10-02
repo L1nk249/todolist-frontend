@@ -5,12 +5,17 @@ import { useRouter } from 'next/navigation';
 import Link from "next/link"
 import Connexion from '../components/Connexion'
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify"; 
 
 
 export default function Header() {
+
+
   const router = useRouter()
  
   const [open, setOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true); // Simule l'authentification (à changer avec le token)
+
 
   const handleOpen = () => {
     setOpen(true);
@@ -20,7 +25,21 @@ export default function Header() {
     setOpen(false);
   };
 
-
+  const handleLogout = () => {
+    // Logique de déconnexion (supprimer le token, etc.)
+    setIsAuthenticated(false); // Simule la déconnexion
+    toast.success("Déconnecté avec succès !", {
+      style: { 
+        fontSize: '2rem',  // Double la taille de la police
+        padding: '20px',   // Ajoute plus de padding pour rendre la bulle plus grande
+        transform: 'scale(1)', 
+        transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
+      },
+    position:  "bottom-center",
+    autoClose: 2000,
+    hideProgressBar: true,
+  });
+  };
 
   const handleClick = () => {
     router.push("/");}
@@ -64,68 +83,115 @@ export default function Header() {
              ></Image>
             </Grid>
 
-            <Typography variant="body1" sx={{ textAlign: "left", flex: 1,mr: 50  }}>
-               <Link href="/" > 
-    
-               <Typography 
-              component="span" 
-              sx={{
-                fontSize: '1.5rem',
-                color: 'black',
-                textDecoration: 'none',
-                display: 'inline-block',
-                transition: 'color 0.3s ease',
-                '&:hover': {
-                  color: 'white',
-                },
-              }}
-            >
-              Accueil
+                {isAuthenticated ? (
+          <>
+            {/* Menu pour utilisateur authentifié */}
+            <Typography variant="body1" sx={{ textAlign: "left", flex: 1, mr: 50 }}>
+              <Link href="/">
+                <Typography
+                  component="span"
+                  sx={{
+                    fontSize: '1.5rem',
+                    color: 'black',
+                    textDecoration: 'none',
+                    display: 'inline-block',
+                    transition: 'color 0.3s ease',
+                    '&:hover': {
+                      color: 'white',
+                    },
+                  }}
+                >
+                  Accueil
+                </Typography>
+              </Link>
             </Typography>
-          </Link>
-        </Typography>
 
+            <Typography variant="body2" sx={{ textAlign: "center", flex: 1 }}>
+              <Typography
+                component="span"
+                sx={{
+                  fontSize: '1.5rem',
+                  color: 'black',
+                  textDecoration: 'none',
+                  display: 'inline-block',
+                  '&:hover': {
+                    color: 'white'
+                  },
+                  cursor: 'pointer'
+                }}
+                onClick={handleLogout} // Bouton de déconnexion
+              >
+                Se déconnecter
+              </Typography>
+            </Typography>
+          </>
+        ) : (
+          <>
+            {/* Menu pour utilisateur non authentifié */}
+            <Typography variant="body1" sx={{ textAlign: "left", flex: 1, mr: 50 }}>
+              <Link href="/">
+                <Typography
+                  component="span"
+                  sx={{
+                    fontSize: '1.5rem',
+                    color: 'black',
+                    textDecoration: 'none',
+                    display: 'inline-block',
+                    transition: 'color 0.3s ease',
+                    '&:hover': {
+                      color: 'white',
+                    },
+                  }}
+                >
+                  Accueil
+                </Typography>
+              </Link>
+            </Typography>
 
-  <Typography variant="body2" sx={{ textAlign: "center", flex: 1 }}>
-   <Link href="/connexion" > 
-    <Typography
-      component="span" // Utiliser un span pour appliquer les styles
-      sx={{
-        fontSize: '1.5rem',
-        color: 'black',
-        display: 'inline-block',
-        transition: 'color 0.3s ease', // Pour une transition douce
-        '&:hover': {
-          color: 'white', // Change la couleur au survol
-        },
-      }}
-    onClick={handleOpen}>
-      Se connecter
-  
-    </Typography>
-    </Link>
-</Typography>
-  {/* Centré */}
-  <Typography variant="body2" sx={{ textAlign: "center", flex: 1 }}>
-  <Link href="/inscription" > 
-    <Typography
-      component="span"
-      sx={{
-        fontSize: '1.5rem',
-        color: 'black',
-        textDecoration: 'none',
-        display: 'inline-block',
-        '&:hover': {
-          color: 'white'
-        },
-      }}
-    >
-     S'inscrire 
-  </Typography>
-    </Link>
-    </Typography>
+            <Typography variant="body2" sx={{ textAlign: "center", flex: 1 }}>
+              <Typography
+                component="span"
+                sx={{
+                  fontSize: '1.5rem',
+                  color: 'black',
+                  textDecoration: 'none',
+                  display: 'inline-block',
+                  '&:hover': {
+                    color: 'white',
+                  },
+                  cursor: 'pointer',
+                }}
+                onClick={handleOpen} // Ouvrir la modal de connexion
+              >
+                Se connecter
+              </Typography>
+            </Typography>
+
+            <Typography variant="body2" sx={{ textAlign: "center", flex: 1 }}>
+              <Link href="/inscription">
+                <Typography
+                  component="span"
+                  sx={{
+                    fontSize: '1.5rem',
+                    color: 'black',
+                    textDecoration: 'none',
+                    display: 'inline-block',
+                    '&:hover': {
+                      color: 'white'
+                    },
+                  }}
+                >
+                  S'inscrire
+                </Typography>
+              </Link>
+            </Typography>
+          </>
+        )}
       </Box>
+
+      {/* Modal de connexion */}
       <Connexion open={open} onClose={handleClose} />
-      </>
-    );
-  }
+      <ToastContainer />
+    </>
+  );
+}
