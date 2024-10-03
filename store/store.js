@@ -1,12 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 // Importez vos slices ici
-import counterReducer from '../features/counterSlice';
+import userReducer from '../features/userSlice';
 
 export const store = configureStore({
   reducer: {
-    // Ajoutez vos slices ici
-    counter: counterReducer,
+    user: userReducer, // Ajouter le userReducer à votre store
   },
 });
 

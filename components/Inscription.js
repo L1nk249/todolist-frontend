@@ -4,10 +4,10 @@ import { Box, Button, TextField, Typography,IconButton,InputAdornment } from "@m
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from "react-toastify"; 
-import 'react-toastify/dist/ReactToastify.css';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useDispatch } from "react-redux";
+import apiUrl from "../config";
 
 const Inscription = () => {
   const [name, setName] = useState("");
@@ -68,7 +68,7 @@ const Inscription = () => {
       return;
     }
 
-    fetch('api_Url/users/signup', {
+    fetch(`${apiUrl}/users/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -92,17 +92,17 @@ const Inscription = () => {
           setPassword("");
           setconfirmPassword("");
           toast.success("Inscription réussie !",toastOptions )
-            
+             
+    setTimeout(() => {
           router.push("/Home") 
+        }, 2000);
         } else {
           toast.error("Erreur lors de l'inscription",toastOptions)
-        
-    
-    setTimeout(() => {
-      router.push("/"); // Redirection vers la page d'accueil après inscription
-    }, 2000); // Ajout d'un délai avant la redirection pour que l'utilisateur voit le toast
-  };
-
+        }})
+        .catch((error) => {
+          toast.error(`Une erreur s'est produite:${error.message}`, toastOptions);
+  })
+  }
 
   return (
     <Box
