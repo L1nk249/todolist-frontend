@@ -11,19 +11,19 @@ export const userSlice = createSlice({
       signUp: (state, action) => {// Pour s'inscrire
         state.value.token = action.payload.token;
         state.value.email = action.payload.email
-        state.value.username = action.payload.username;
-        state.value.email = action.payload.email
+        state.value.name = action.payload.username;
+      
       },
       
       signIn: (state, action) => { // Pour se connecter
-        state.value.username = action.payload.username
+        state.value.name = action.payload.username
         state.value.token = action.payload.token
         state.value.email = action.payload.email
       },
 
       logout: (state, action) => {//pour se deconnecter
         state.value.token = null;
-        state.value.username = null;
+        state.value.name = null;
         state.value.email = null;
       },
       
@@ -37,5 +37,5 @@ export const userSlice = createSlice({
     },
   });
   
-  export const { signIn, signUp, logout,removeUser } = userSlice.actions;
+  export const { signIn, signUp, logout } = userSlice.actions;
   export default userSlice.reducer;

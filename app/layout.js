@@ -1,4 +1,7 @@
-import Header from "../components/Header";
+'use client'; // Ce composant sera rendu côté client
+
+import { Provider } from 'react-redux';
+import store from '../store/store';import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { FormatQuoteRounded } from "@mui/icons-material";
 
@@ -13,7 +16,9 @@ export default function RootLayout({ children }) {
       <body>
         <Header />
 
-        {children}
+        <Provider store={store}>
+          {children}
+        </Provider>
 
         <Footer />
       </body>

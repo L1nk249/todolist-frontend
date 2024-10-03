@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { useDispatch } from "react-redux";
 
 const Inscription = () => {
   const [name, setName] = useState("");
@@ -17,6 +18,7 @@ const Inscription = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const router = useRouter();
+  const dispatch = useDispatch();
   const toggleShowPassword = () => {
     // Pour afficher où non le mot de passe
     setShowPassword((prev) => !prev);
@@ -31,57 +33,42 @@ const Inscription = () => {
   // Regex pour valider le mot de passe
   const passwordRegex = /^(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?])(?=.*[0-9])[A-Za-z0-9!@#$%^&*()_+[\]{};':"\\|,.<>/?]{8,}$/
 
+  const toastOptions = {
+    style: { 
+      fontSize: '2rem', 
+      padding: '20px',
+      transform: 'scale(1)',
+      transformOrigin: 'center',
+    },
+    position: "bottom-center",
+    autoClose: 2000,
+    hideProgressBar: true,
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Logique d'inscription ici
     // Exemple de redirection après inscription
   if (!emailRegex.test(email)) { // Si le mail ne correspond pas (test method) alors alert error 
     
-      toast.warning("Ce mail n'est pas valide", {
-        style: { 
-            fontSize: '2rem',  // Double la taille de la police
-            padding: '20px',   // Ajoute plus de padding pour rendre la bulle plus grande
-            transform: 'scale(1)', 
-            transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
-          },
-        position: " bottom-center",
-        autoClose: 2000,
-        hideProgressBar: true,
-      });
+      toast.warning("Ce mail n'est pas valide",toastOptions)
+       
       return;
     }
   
   if (!passwordRegex.test(password)) {// Si le password ne correspond pas (test method) alors alert error 
-      toast.warning("Mot de passe invalide ", {
-        style: { 
-            fontSize: '2rem',  // Double la taille de la police
-            padding: '20px',   // Ajoute plus de padding pour rendre la bulle plus grande
-            transform: 'scale(1)', 
-            transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
-          },
-        position: "bottom-center",
-        autoClose: 2000,
-        hideProgressBar: true,
-      });
+      toast.warning("Mot de passe invalide ",toastOptions)
       return;
     }
 
   if (password !== confirmPassword) { // si password n'est pas égal à confirm password alors error.
-      toast.warning("Les mots de passe ne correspondent pas ", {
-        style: { 
-            fontSize: '2rem',  // Double la taille de la police
-            padding: '20px',   // Ajoute plus de padding pour rendre la bulle plus grande
-            transform: 'scale(1)', 
-            transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
-          },
-        position:  "bottom-center",
-        autoClose: 2000,
-        hideProgressBar: true,
-      });
+      toast.warning("Les mots de passe ne correspondent pas ",toastOptions) 
+     
+    
       return;
     }
 
-    fetch('apiUrl/users/signup', {
+    fetch('api_Url/users/signup', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -100,22 +87,16 @@ const Inscription = () => {
               token: data.token,
             })
           );
-          setSignUpUsername("");
-          setSignUpEmail("");
-          setSignUpPassword("");
-          setConfirmPassword("");
+          setName("");
+          setEmail("");
+          setPassword("");
+          setconfirmPassword("");
+          toast.success("Inscription réussie !",toastOptions )
+            
           router.push("/Home") 
-    toast.success("Inscription réussie !", {
-      style: { 
-        fontSize: '2rem',  // Double la taille de la police
-        padding: '20px',   // Ajoute plus de padding pour rendre la bulle plus grande
-        transform: 'scale(1)', 
-        transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
-      },
-    position:  "bottom-center",
-    autoClose: 2000,
-    hideProgressBar: true,
-  });
+        } else {
+          toast.error("Erreur lors de l'inscription",toastOptions)
+        
     
     setTimeout(() => {
       router.push("/"); // Redirection vers la page d'accueil après inscription
