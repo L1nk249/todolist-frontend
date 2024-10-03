@@ -127,8 +127,12 @@ return (
                     <Button
                       variant="contained"
                       fullWidth
-                      sx={{  height: "56px",fontSize: "1.5rem",
-                        
+                      sx={{  height: "56px",fontSize: {
+                        xs: "0.7rem",  // Petits écrans (mobile)
+                        sm: "1rem",  // Écrans moyens (tablettes)
+                        md: "1.2rem",  // Écrans plus grands (ordinateurs)
+                        lg: "1,5rem",  // Très grands écrans
+                      },
                         }}
                       onClick={handleAdd}
                     >

@@ -80,6 +80,31 @@ const Inscription = () => {
       });
       return;
     }
+
+    fetch('apiUrl/users/signup', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: name,
+        email: email,
+        password: password,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
+          dispatch(
+            signUp({
+              username: name,
+              email: email,
+              token: data.token,
+            })
+          );
+          setSignUpUsername("");
+          setSignUpEmail("");
+          setSignUpPassword("");
+          setConfirmPassword("");
+          router.push("/Home") 
     toast.success("Inscription réussie !", {
       style: { 
         fontSize: '2rem',  // Double la taille de la police
