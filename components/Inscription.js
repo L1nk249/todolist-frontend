@@ -44,7 +44,7 @@ const Inscription = () => {
     autoClose: 2000,
     hideProgressBar: true,
   };
-
+//
   const handleSubmit = (e) => {
     e.preventDefault();
     // Logique d'inscription ici

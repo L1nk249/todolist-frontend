@@ -63,7 +63,7 @@ position: "bottom-center",
   };
 
   const handleDelete = (index) => {
-    setTodos((prev) => prev.filter((_, i) => i !== index));
+    setTodos((prev) => prev.filter((_, i) => i !== index)); 
     toast.info("Todo supprimé.", {
         position:  "bottom-center",
         autoClose: 2000,})
