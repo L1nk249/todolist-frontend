@@ -9,12 +9,12 @@ import Connexion from '../components/Connexion'
 import toastMessages from "../config/toastMessages";
 
 export default function Home() {
-  const [todos, setTodos] = useState([]);
-  const [todo, setTodo] = useState("");
+  const [todos, setTodos] = useState([]); //liste des todos 
+  const [todo, setTodo] = useState("")  //to do en cours d'écriture
   const [openModal, setOpenModal] = useState(false); // Gérer la visibilité de la modale (Connexion)
 
   const handleAdd = () => {
-    if (todo.trim() === '') {
+    if (todo.trim() === '') {// .trim()  valide les saisies utilisateur, pour éviter que des espaces ne soient pris en compte comme des caractères valides. trim()==='' alors tt est vide.
       toast.error(toastMessages.error.emptyField)
       return;
     }
@@ -30,17 +30,19 @@ export default function Home() {
     setTimeout(() => {
       setOpenModal(true)
     }, 2000);
-   } else {setTodos((prev) => [...prev, todo]);
+
+   } else {setTodos((prev) => [...prev, todo]);// si todo pas superieur à 9 alors rajoute les todos à la liste et réinitialise le champ de saisie.
     setTodo("");}
 
   };
 
-  const handleDelete = (index) => {
-    setTodos((prev) => prev.filter((_, i) => i !== index)); 
+  const handleDelete = (index) => {  // index représente la position d'un todo spécifique dans le tableau todos)
+    setTodos((prev) => prev.filter((_, i) => i !== index)); // i!== index signifie que tu gardes tous les todos dont l'index (i) n'est pas égal à celui que tu veux supprimer/
+    // _ = on ignore le premier parametre on ne prend que i en compte/
     toast.info(toastMessages.info.deletedTodo)
   };
   const closeModal = () => {
-    setOpenModal(false); // Function to close the modal
+    setOpenModal(false); // ferme la modal l
   };
 return (
         <>
@@ -67,8 +69,6 @@ return (
 
     
           <Grid container justifyContent="center" alignItems="center" spacing={2} style={{ padding: '20px 0',marginTop:'165px' }}>
-           
-            
             </Grid>
             <Grid item xs={12}>
               <Box>

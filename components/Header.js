@@ -14,16 +14,16 @@ export default function Header() {
 
   const router = useRouter()
  
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);// etat pour la modal 
   const [isAuthenticated, setIsAuthenticated] = useState(true); // Simule l'authentification (à changer avec le token)
 
 
   const handleOpen = () => {
-    setOpen(true);
+    setOpen(true);  // handleOpen ouvre la modal (en appelant <connexion open/onCLose>)
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpen(false);// pour fermer la modal 
   };
 
   const handleLogout = () => {

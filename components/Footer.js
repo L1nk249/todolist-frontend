@@ -7,7 +7,7 @@ import Link from "next/link"
 
 export default function Footer() {
   return (
-    <Box
+    <Box // === div avec la possibilite dintegrer le css en mode mui 
   component="footer"
   sx={{
     py: 3,
@@ -55,7 +55,7 @@ export default function Footer() {
       Me contacter
     </Typography>
   </Link>
-</Typography>
+</Typography> // permet de gérer efficacement l'apparence et le style du texte dans tes applications React.
   {/* Centré */}
   <Typography variant="body2" sx={{ textAlign: "center", flex: 1, }}>
     <MuiLink

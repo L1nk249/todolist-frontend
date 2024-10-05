@@ -14,13 +14,14 @@ export default function ContactPage() {
     name: "",
     email: "",
     message: ""
-  });
+  });   // valeurs de useState initialisées à null)
   const router = useRouter()
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target;//e.target:: C'est l'élément qui a déclenché l'événement, ici un champ de formulaire
+    // name et value destructuration: name correspond au nom de l'inoput et value à sa valeur )
     setForm((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: value,  // [name]: value : Cela met à jour la propriété correspondante dans l'objet
     }));
   };
  
@@ -37,7 +38,7 @@ setTimeout(() => {
     <Box
       component="form"
       onSubmit={handleSubmit}
-      sx={{
+      sx={{    // SX: prop de MUI pour définir du style direcement sans utiliser du css.
         marginTop:"120px",
         display: "flex",
         flexDirection: "column",
@@ -106,16 +107,7 @@ setTimeout(() => {
           </Button>
         </Grid>
       </Grid>
-      <ToastContainer
-            position="top-center" // Positionnez le toast en haut et au centre
-            autoClose={3000} // Ferme automatiquement après 3 secondes
-            hideProgressBar={true} // Masque la barre de progression
-            closeOnClick // Ferme le toast au clic
-            pauseOnHover // Met en pause l'auto-fermeture au survol
-            draggable // Permet le glissement
-            pauseOnFocusLoss // Met en pause l'auto-fermeture si le toast perd le focus
-            theme="light" // Choisissez un thème (light ou dark)
-            />
+    
     </Box>
   );
 }

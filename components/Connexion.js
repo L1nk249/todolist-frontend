@@ -105,7 +105,7 @@ const Connexion = ({ open, onClose }) => {
         </DialogActions>
         </Box>
       </Dialog>
-      <ForgottenPassword open={showForgottenPassword} onClose={handleCloseForgottenPassword} />
+      <ForgottenPassword open={showForgottenPassword} onClose={handleCloseForgottenPassword} /> // ouvre et referme la modal forgotenpassword
       </>
     );
   };

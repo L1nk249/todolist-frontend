@@ -35,7 +35,7 @@ const Inscription = () => {
   const passwordRegex = /^(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?])(?=.*[0-9])[A-Za-z0-9!@#$%^&*()_+[\]{};':"\\|,.<>/?]{8,}$/
 
  
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => { // e = evenement, input...
     e.preventDefault();
     // Logique d'inscription ici
     // Exemple de redirection après inscription
@@ -81,7 +81,7 @@ const Inscription = () => {
           setEmail("");
           setPassword("");
           setconfirmPassword("");
-          toast.success(toastMessages.success.userCreated)
+          toast.success(toastMessages.success.userCreated) // réinitialisation de tous les champs 
              
     setTimeout(() => {
           router.push("/Home") 
@@ -143,8 +143,8 @@ const Inscription = () => {
       
           sx={{ marginBottom: 2, height: "05vh", width: "15vW" }}
           InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
+            endAdornment: (   //propriété utilisée dans Material-UI (MUI) pour ajouter un élément visuel ou interactif à la fin d'un champ de saisie (Input) inputadornment:conteneur
+              <InputAdornment position="end">  
                 <IconButton onClick={toggleShowPassword}>
                   {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
                 </IconButton>

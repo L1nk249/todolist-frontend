@@ -15,7 +15,6 @@ export default function RootLayout({ children }) {
       padding: '20px',
       transform: 'scale(1)',
       transformOrigin: 'center',
-    
     },
     autoClose: 2000,
     hideProgressBar: true,
@@ -28,7 +27,7 @@ export default function RootLayout({ children }) {
             <Header />
             {children}
             <ToastContainer
-              position="bottom-center" {...toastOptions} />
+              position="bottom-center" {...toastOptions} />  // spread operator pour rajouter toutes les toastOptions à ToastContainer
             <Footer />
           </ThemeProvider>
         </Provider>
