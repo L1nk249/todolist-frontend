@@ -3,9 +3,10 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify"; 
+import {  toast } from "react-toastify"; 
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
+import toastMessages from "../../config/toastMessages";
 
 
 export default function ContactPage() {
@@ -26,13 +27,7 @@ export default function ContactPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
   
-    toast.info("Message envoyé avec succès!",{
-      style: { 
-          fontSize: '1.5rem',  // Double la taille de la police
-          padding: '20px',   // Ajoute plus de padding pour rendre la bulle plus grande
-          transform: 'scale(1)', 
-          transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
-}}) 
+    toast.info(toastMessages.info.sentMessage)
 setTimeout(() => {
   router.push("/"); // Redirection vers la page d'accueil
 }, 3000); // 3 secondes pour permettre à l'utilisateur de voir le message

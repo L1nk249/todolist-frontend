@@ -3,9 +3,10 @@ import { Box, TextField, Button, Grid } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify"; 
+import { toast } from "react-toastify"; 
 import 'react-toastify/dist/ReactToastify.css';
 import Connexion from '../components/Connexion'
+import toastMessages from "../config/toastMessages";
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
@@ -14,46 +15,18 @@ export default function Home() {
 
   const handleAdd = () => {
     if (todo.trim() === '') {
-      toast.error("Le ToDo ne peut pas être vide!", {
-        style: { 
-            fontSize: '2rem',  // Double la taille de la police
-            padding: '20px',   // Ajoute plus de padding pour rendre la bulle plus grande
-            transform: 'scale(1)', 
-            transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
-          },
-        position: "bottom-center",
-        autoClose: 2000,
-        hideProgressBar: true,
-      });
+      toast.error(toastMessages.error.emptyField)
       return;
     }
     
     if (todos.includes(todo)) {
-      toast.warning("Ce ToDo existe déjà!", {
-        style: { 
-            fontSize: '2rem',  // Double la taille de la police
-            padding: '20px',   // Ajoute plus de padding pour rendre la bulle plus grande
-            transform: 'scale(1)', 
-            transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
-          },
-        position: " bottom-center",
-        autoClose: 2000,
-        hideProgressBar: true,
-      });
+      toast.warning(toastMessages.warning.existingTodo)
+       
       return;
     }
 
    if (todos.length>9){
-    toast.info("Limite atteinte, Connectez vous pour poursuivre",{
-        style: { 
-            fontSize: '2rem',  // Double la taille de la police
-            padding: '20px',   // Ajoute plus de padding pour rendre la bulle plus grande
-            transform: 'scale(1)', 
-            transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
-          },
-position: "bottom-center",
-        autoClose: 2000,
-    })
+    toast.info(toastMessages.info.limitReached)
     setTimeout(() => {
       setOpenModal(true)
     }, 2000);
@@ -74,8 +47,7 @@ position: "bottom-center",
 return (
         <>
         <Connexion open={openModal} onClose={closeModal} />
-    <ToastContainer />
-
+   
          <div
       style={{
         height: '100vh', // hauteur de la fenêtre

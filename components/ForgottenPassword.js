@@ -1,9 +1,9 @@
 "use client"; // Assurez-vous d'ajouter cette ligne si vous utilisez Next.js avec des composants côté client
 
 import {  Button, TextField,Dialog,DialogTitle ,DialogContent,DialogActions } from "@mui/material";
-import { ToastContainer, toast } from "react-toastify"; 
+import { toast } from "react-toastify"; 
 import 'react-toastify/dist/ReactToastify.css';
-
+import toastMessages from "../config/toastMessages";
 
 
 
@@ -11,17 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
        
       const handleSendResetLink = () => {
         // Logique pour envoyer un email de réinitialisation
-        toast.success("Mot de passe réinitialisé avec succès !", {
-          style: { 
-            fontSize: '2rem',  // Double la taille de la police
-            padding: '20px',   // Ajoute plus de padding pour rendre la bulle plus grande
-            transform: 'scale(1)', 
-            transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
-          },
-        position: "bottom-center",
-        autoClose: 2000,
-        hideProgressBar: true,
-      });
+        toast.success(toastMessages.success.passwordReset );
 
         onClose(); // Ferme la modal après l'envoi du lien
       };
@@ -63,7 +53,7 @@ import 'react-toastify/dist/ReactToastify.css';
               </Button>
             </DialogActions>
           </Dialog>
-          <ToastContainer/>
+        
        </>
         );
       };

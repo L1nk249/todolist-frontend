@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation';
 import Link from "next/link"
 import Connexion from '../components/Connexion'
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify"; 
+import {toast } from "react-toastify"; 
+import toastMessages from "../config/toastMessages";
 
 
 export default function Header() {
@@ -28,18 +29,8 @@ export default function Header() {
   const handleLogout = () => {
     // Logique de déconnexion (supprimer le token, etc.)
     setIsAuthenticated(false); // Simule la déconnexion
-    toast.success("Déconnecté avec succès !", {
-      style: { 
-        fontSize: '2rem',  // Double la taille de la police
-        padding: '20px',   // Ajoute plus de padding pour rendre la bulle plus grande
-        transform: 'scale(1)', 
-        transformOrigin: 'center', // Garde le centre comme point de référence pour l'agrandissement
-      },
-    position:  "bottom-center",
-    autoClose: 2000,
-    hideProgressBar: true,
-  });
-  };
+    toast.success(toastMessages.success.disconnected)}
+      
 
   const handleClick = () => {
     router.push("/");}
@@ -191,7 +182,7 @@ export default function Header() {
 
       {/* Modal de connexion */}
       <Connexion open={open} onClose={handleClose} />
-      <ToastContainer />
+     
     </>
   );
 }
