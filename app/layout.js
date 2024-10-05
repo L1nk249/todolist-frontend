@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 import store from '../store/store';import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { ToastContainer } from 'react-toastify';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from '../theme/theme'
 
 export default function RootLayout({ children }) {
   const toastOptions = {
@@ -13,7 +15,7 @@ export default function RootLayout({ children }) {
       padding: '20px',
       transform: 'scale(1)',
       transformOrigin: 'center',
-      position:"bottom-center"
+    
     },
     autoClose: 2000,
     hideProgressBar: true,
@@ -21,13 +23,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr">
       <body>
-        <Header />
-
         <Provider store={store}>
-          {children}
+          <ThemeProvider theme={theme}>  {/* Wrap components with ThemeProvider */}
+            <Header />
+            {children}
+            <ToastContainer
+              position="bottom-center" {...toastOptions} />
+            <Footer />
+          </ThemeProvider>
         </Provider>
-<ToastContainer {...toastOptions}/>
-        <Footer />
       </body>
     </html>
   );

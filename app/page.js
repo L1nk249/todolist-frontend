@@ -37,9 +37,7 @@ export default function Home() {
 
   const handleDelete = (index) => {
     setTodos((prev) => prev.filter((_, i) => i !== index)); 
-    toast.info("Todo supprimé.", {
-        position:  "bottom-center",
-        autoClose: 2000,})
+    toast.info(toastMessages.info.deletedTodo)
   };
   const closeModal = () => {
     setOpenModal(false); // Function to close the modal
