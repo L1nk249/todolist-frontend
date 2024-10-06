@@ -58,5 +58,4 @@ import toastMessages from "../config/toastMessages";
         );
       };
       
-      
-export default ForgottenPassword
+      export default ForgottenPassword;

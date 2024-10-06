@@ -3,14 +3,14 @@
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import { Box,Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button} from '@mui/material';
-import ForgottenPassword from '../components/ForgottenPassword'
 import toastMessages from "../config/toastMessages";
-
+import ForgottenPassword from '../components/ForgottenPassword'
+import { useDispatch } from 'react-redux';
 
 const Connexion = ({ open, onClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showForgottenPassword,  setShowForgottenPassword] = useState(false)
+  const [showForgottenPassword, setShowForgottenPassword] = useState(false);  // Utilisation de useState
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -24,9 +24,7 @@ const Connexion = ({ open, onClose }) => {
       toast.error(toastMessages.error.missingField)
       return;
     }
-  };
 
-  
 fetch(`${apiUrl}/users/signin`,{
   method: "POST",
   headers: { "Content-Type": "application/json" },
@@ -130,7 +128,7 @@ fetch(`${apiUrl}/users/signin`,{
             Annuler
           </Button>
         
-          <Button type="submit" color="primary" onClick={handleSubmit}
+          <Button color="primary" onClick={handleSubmit}
 
           sx={{
                 '&:hover': {
@@ -143,7 +141,10 @@ fetch(`${apiUrl}/users/signin`,{
         </DialogActions>
         </Box>
       </Dialog>
-      <ForgottenPassword open={showForgottenPassword} onClose={handleCloseForgottenPassword} /> // ouvre et referme la modal forgotenpassword
+      {showForgottenPassword && (
+  <ForgottenPassword open={showForgottenPassword} onClose={handleCloseForgottenPassword} />
+)}
+
       </>
     );
   };
