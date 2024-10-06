@@ -64,7 +64,7 @@ export default function Header() {
               if (data.result) {
                 // Si data alors supprime le compte, logout le user et renvoie sur home
                 dispatch(logout());
-                router.push("/Home");
+                router.push("/");
               }
             }
           });
