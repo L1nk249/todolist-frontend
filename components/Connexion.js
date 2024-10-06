@@ -3,32 +3,70 @@
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import { Box,Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button} from '@mui/material';
-import ForgottenPassword from "./ForgottenPassword";
+import ForgottenPassword from '../components/ForgottenPassword'
+import toastMessages from "../config/toastMessages";
 
 
 const Connexion = ({ open, onClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showForgottenPassword, setShowForgottenPassword] = useState(false)
+  const [showForgottenPassword,  setShowForgottenPassword] = useState(false)
 
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Logique d'authentification ici
-    // Exemple de redirection après connexion
-    onClose();
-    router.push("/"); // Redirection vers la page d'accueil après connexion
+   
+    if (!email || !password) {
+
+      toast.error(toastMessages.error.missingField)
+      return;
+    }
   };
 
-  const handleForgotPasswordClick = () => {
-    setShowForgottenPassword(true); // Affiche le composant ForgottenPassword
-  };
-
-  const handleCloseForgottenPassword = () => {
-    setShowForgottenPassword(false); // Ferme le composant ForgottenPassword
-  };
   
+fetch(`${apiUrl}/users/signin`,{
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ email: email, password: password }),
+})
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+    if (data.result) {
+      //Si la connexion est réussie (data.result est true), l'utilisateur est connecté, et ses informations sont enregistrées dans Redux (dispatch(signIn)).
+      dispatch(
+        signIn({
+          email: email,
+          token: data.token,
+        })
+      );
+      setEmail("");
+      setPassword("");
+      router.push("/Home");//on reinitialise les etats et on redirige sur Home
+    } else {
+      toast.error (toastMessages.error.incorrectField)
+    
+      }
+      
+    })
+    .catch((error) => {
+      toast.error("Erreur serveur, réessayez plus tard.");
+      console.error("Erreur:", error);
+    });
+};
+
+    const handleForgotPasswordClick = () => {
+      setShowForgottenPassword(true); // Affiche le composant ForgottenPassword
+    };
+  
+    const handleCloseForgottenPassword = () => {
+      setShowForgottenPassword(false); // Ferme le composant ForgottenPassword
+    };
+
+
     return (
       <>
       <Dialog open={open} onClose={onClose}>

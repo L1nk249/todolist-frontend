@@ -11,6 +11,8 @@ const toastMessages = {
       saveFailed: "Échec de l'enregistrement des données.",
       emptyField:"Le ToDo ne peut pas être vide!",
       errorOccured:"Une erreur s'est produite:",
+      missingField:"Email ou mot de passe manquant ",
+      incorrectField: "Mail ou Pseudo incorrects "
     },
 
     info: {
