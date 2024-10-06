@@ -2,7 +2,8 @@
 'use client'
 
 import { Provider } from 'react-redux';
-import store from '../store/store';import Header from "../components/Header";
+import store from '../store/store';
+import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { ToastContainer } from 'react-toastify';
 import { ThemeProvider } from '@mui/material/styles';
@@ -27,7 +28,7 @@ export default function RootLayout({ children }) {
             <Header />
             {children}
             <ToastContainer
-              position="bottom-center" {...toastOptions} />  // spread operator pour rajouter toutes les toastOptions à ToastContainer
+              position="bottom-center" {...toastOptions} />  {/* spread operator pour rajouter toutes les toastOptions à ToastContainer */}
             <Footer />
           </ThemeProvider>
         </Provider>

@@ -7,15 +7,18 @@ import Connexion from '../components/Connexion'
 import { useState } from "react";
 import {toast } from "react-toastify"; 
 import toastMessages from "../config/toastMessages";
-
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../features/userSlice"
+import Swal from "sweetalert2";
+import apiUrl from "../config";
 
 export default function Header() {
 
-
+  const dispatch = useDispatch();//
   const router = useRouter()
- 
+  const token = useSelector((state) => state.user.value.token) //le reducer va chercher la valeur du token pour dire si user connected ou non
+  console.log("Token in Header:", token);
   const [open, setOpen] = useState(false);// etat pour la modal 
-  const [isAuthenticated, setIsAuthenticated] = useState(true); // Simule l'authentification (à changer avec le token)
 
 
   const handleOpen = () => {
@@ -27,14 +30,55 @@ export default function Header() {
   };
 
   const handleLogout = () => {
-    // Logique de déconnexion (supprimer le token, etc.)
-    setIsAuthenticated(false); // Simule la déconnexion
+    dispatch(logout());
     toast.success(toastMessages.success.disconnected)}
       
 
+    const handleDelete = async () => {
+      // Async await pour attendre la validation de l'user avant de supprimer ou pas le profil
+  
+      const proceed = await Swal.fire({
+        title: "Êtes-vous sûr ?",
+        text: "Vous ne pourrez pas revenir en arrière !",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Oui, supprimer !",
+        cancelButtonText: "Annuler",
+        timer: 50000,
+      });
+  
+      console.log(proceed);
+      if (proceed.isConfirmed) {
+        // proceed.isConfirmed car lié à swal.)
+        //  on appelle la route delete avec le param token ( pas besoin de req.body on veut tt supprimer)
+        fetch(`${apiUrl}/users/delete/${token}`, {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            {
+              if (data.result) {
+                // Si data alors supprime le compte, logout le user et renvoie sur home
+                dispatch(logout());
+                router.push("/Home");
+              }
+            }
+          });
+      }
+    };
+
+
+
+
+
+
   const handleClick = () => {
     router.push("/");}
-
+  
     return (
       <>
       <Box
@@ -74,8 +118,9 @@ export default function Header() {
              ></Image>
             </Grid>
 
-                {isAuthenticated ? (
-          <>
+            
+           {token ? (  
+            <>
             {/* Menu pour utilisateur authentifié */}
             <Typography variant="body1" sx={{ textAlign: "left", flex: 1, mr: 50 }}>
               <Link href="/">
@@ -114,8 +159,42 @@ export default function Header() {
               >
                 Se déconnecter
               </Typography>
+
             </Typography>
+
+            <Typography variant="body2" sx={{ textAlign: "center", flex: 1 }}>
+              <Typography
+                component="span"
+                sx={{
+                  fontSize: '1.5rem',
+                  color: 'black',
+                  textDecoration: 'none',
+                  display: 'inline-block',
+                  '&:hover': {
+                    color: 'white'
+                  },
+                  cursor: 'pointer'
+                }}
+                onClick={handleDelete} // Bouton de suppression de compte
+              >
+                Supprimer son compte 
+              </Typography>
+
+            </Typography>
+
+
+
           </>
+
+
+
+
+
+
+
+
+
+
         ) : (
           <>
             {/* Menu pour utilisateur non authentifié */}

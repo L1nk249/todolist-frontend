@@ -2,18 +2,30 @@
 
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
-import { Box,Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button} from '@mui/material';
+import { Box,Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button,IconButton,InputAdornment} from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import toastMessages from "../config/toastMessages";
 import ForgottenPassword from '../components/ForgottenPassword'
 import { useDispatch } from 'react-redux';
+import { signIn } from "../features/userSlice";
+import apiUrl from "../config";
+
 
 const Connexion = ({ open, onClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showForgottenPassword, setShowForgottenPassword] = useState(false);  // Utilisation de useState
-
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
+  const toggleShowPassword = () => {
+    // Pour afficher où non le mot de passe
+    setShowPassword((prev) => !prev);
+  };
+
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,13 +49,14 @@ fetch(`${apiUrl}/users/signin`,{
       //Si la connexion est réussie (data.result est true), l'utilisateur est connecté, et ses informations sont enregistrées dans Redux (dispatch(signIn)).
       dispatch(
         signIn({
-          email: email,
+          email,
           token: data.token,
         })
       );
       setEmail("");
       setPassword("");
-      router.push("/Home");//on reinitialise les etats et on redirige sur Home
+      onClose()
+      router.push("/");//on reinitialise les etats et on redirige sur Home
     } else {
       toast.error (toastMessages.error.incorrectField)
     
@@ -51,7 +64,6 @@ fetch(`${apiUrl}/users/signin`,{
       
     })
     .catch((error) => {
-      toast.error("Erreur serveur, réessayez plus tard.");
       console.error("Erreur:", error);
     });
 };
@@ -84,23 +96,31 @@ fetch(`${apiUrl}/users/signin`,{
               required
               sx={{ 
                 mb: 2, // Marge en bas pour espacer les champs
+                height: "05vh", 
+                width: "15vw",
                 '& .MuiInputBase-input': { fontSize: '1.5rem' }, // Taille de la police d'entrée
               }}
             />
             <TextField
               margin="dense"
               label="Mot de passe"
-              type="password"
+              type={showPassword ? "text" : "password"}
               fullWidth
               variant="outlined"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
-              sx={{ 
-                mb: 2,
-                '& .MuiInputBase-input': { fontSize: '1.5rem' },
-              }}
-            />
+             
+          sx={{ marginBottom: 2, height: "05vh", width: "15vW" }}
+          InputProps={{
+            endAdornment: (   //propriété utilisée dans Material-UI (MUI) pour ajouter un élément visuel ou interactif à la fin d'un champ de saisie (Input) inputadornment:conteneur
+              <InputAdornment position="end">  
+                <IconButton onClick={toggleShowPassword}>
+                  {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
             
           <Button onClick={handleForgotPasswordClick} color="primary"
           sx={{
@@ -141,7 +161,7 @@ fetch(`${apiUrl}/users/signin`,{
         </DialogActions>
         </Box>
       </Dialog>
-      {showForgottenPassword && (
+      {showForgottenPassword && (  // pour éviter d'afficher le composant automatiquement mais uniquement quand c'est voulu 
   <ForgottenPassword open={showForgottenPassword} onClose={handleCloseForgottenPassword} />
 )}
 

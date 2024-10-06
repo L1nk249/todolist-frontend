@@ -55,8 +55,8 @@ export default function Footer() {
       Me contacter
     </Typography>
   </Link>
-</Typography> // permet de gérer efficacement l'apparence et le style du texte dans tes applications React.
-  {/* Centré */}
+</Typography> 
+  {/*  permet de gérer efficacement l'apparence et le style du texte dans tes applications React.*/}
   <Typography variant="body2" sx={{ textAlign: "center", flex: 1, }}>
     <MuiLink
       href="https://cedriclevyportfolio.vercel.app/"
