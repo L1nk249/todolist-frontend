@@ -86,7 +86,9 @@ const Inscription = () => {
           setconfirmPassword("");
          
           setTimeout( 1000); // Attends 2 secondes
+         
           router.push("/");
+
         } else {
           toast.error(toastMessages.error.errorSubscribe);
         }})
