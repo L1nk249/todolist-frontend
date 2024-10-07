@@ -7,6 +7,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import toastMessages from "../config/toastMessages";
 import ForgottenPassword from '../components/ForgottenPassword'
+import ResetPassword from '../components/ResetPassword'
 import { useDispatch } from 'react-redux';
 import { signIn } from "../features/userSlice";
 import apiUrl from "../config";
@@ -17,6 +18,7 @@ const Connexion = ({ open, onClose }) => {
   const [password, setPassword] = useState("");
   const [showForgottenPassword, setShowForgottenPassword] = useState(false);  // Utilisation de useState
   const [showPassword, setShowPassword] = useState(false);
+  const [showResetPassword,setShowResetPassword]=useState(false)
   const dispatch = useDispatch();
   const router = useRouter();
   const toggleShowPassword = () => {
@@ -74,6 +76,10 @@ fetch(`${apiUrl}/users/signin`,{
   
     const handleCloseForgottenPassword = () => {
       setShowForgottenPassword(false); // Ferme le composant ForgottenPassword
+    };
+
+    const handleCloseResetPassword = () => {
+      setShowResetPassword(false); // Ferme le composant ForgottenPassword
     };
 
 
@@ -163,8 +169,9 @@ fetch(`${apiUrl}/users/signin`,{
       </Dialog>
       {showForgottenPassword && (  // pour éviter d'afficher le composant automatiquement mais uniquement quand c'est voulu 
   <ForgottenPassword open={showForgottenPassword} onClose={handleCloseForgottenPassword} />
-)}
 
+)}
+  <ResetPassword open={showResetPassword} onClose={handleCloseResetPassword} />
       </>
     );
   };

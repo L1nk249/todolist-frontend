@@ -13,7 +13,8 @@ const toastMessages = {
       emptyField:"Le ToDo ne peut pas être vide!",
       errorOccured:"Une erreur s'est produite:",
       missingField:"Email ou mot de passe manquant ",
-      incorrectField: "Mail ou Pseudo incorrects "
+      incorrectField: "Mail ou Pseudo incorrects ",
+      incorrectPassword:"Les mots de passe ne correspondent pas"
     },
 
     info: {
