@@ -4,16 +4,39 @@ import {  Button, TextField,Dialog,DialogTitle ,DialogContent,DialogActions } fr
 import { toast } from "react-toastify"; 
 import 'react-toastify/dist/ReactToastify.css';
 import toastMessages from "../config/toastMessages";
-
+import apiUrl from "../config";
+import { useState } from "react";
 
 
     function ForgottenPassword({ open, onClose }) {
-       
-      const handleSendResetLink = () => {
-        // Logique pour envoyer un email de réinitialisation
-        toast.success(toastMessages.success.passwordReset );
+      const [email, setEmail] = useState("");
 
-        onClose(); // Ferme la modal après l'envoi du lien
+      const handleSendResetLink = () => {
+        if (!email) {
+          toast.error(toastMessages.error.missingField); // Alerte si aucun email n'est saisi
+
+          return;}
+
+        fetch(`${apiUrl}/users/forgot-password`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email}), // Envoyer l'email pour réinitialiser le mot de passe.
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            if (data.result) {
+             toast.success (toastMessages.success.emailSent);
+              onClose(); // Fermer la modal après l'envoi de l'email.
+            } else {
+              toast.error (toastMessages.error.errorOccured);
+              };
+            })
+          .catch((error) => {
+      console.log("error",error)
+      toast.error(toastMessages.error.errorOccured);
+            });
+          
       };
           return (
             <>
@@ -37,7 +60,7 @@ import toastMessages from "../config/toastMessages";
                 type="email"
                 height="50px"
                 width="50px"
-              
+                onChange={(e) => setEmail(e.target.value)}
                 fullWidth
                 variant="outlined"
                 required

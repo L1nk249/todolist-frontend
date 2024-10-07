@@ -9,6 +9,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useDispatch } from "react-redux";
 import apiUrl from "../config";
 import toastMessages from "../config/toastMessages";
+import { signUp } from "../features/userSlice";
 
 const Inscription = () => {
   const [name, setName] = useState("");
@@ -68,7 +69,7 @@ const Inscription = () => {
       }),
     })
       .then((response) => response.json())
-      .then((data) => {
+      .then(async(data) => {
         if (data.result) {
           dispatch(
             signUp({
@@ -76,22 +77,20 @@ const Inscription = () => {
               email: email,
               token: data.token,
             })
-          );
+          )
+          toast.success(toastMessages.success.userCreated)
+             
           setName("");
           setEmail("");
           setPassword("");
           setconfirmPassword("");
-          toast.success(toastMessages.success.userCreated) // réinitialisation de tous les champs 
-             
-    setTimeout(() => {
-          router.push("/Home") 
-        }, 2000);
+         
+          setTimeout( 1000); // Attends 2 secondes
+          router.push("/");
         } else {
-          toast.error(toastMessages.error.errorSubscribe)
+          toast.error(toastMessages.error.errorSubscribe);
         }})
-        .catch((error) => {
-          toast.error(toastMessages.error.errorOccured)
-  })
+
   }
 
   return (
