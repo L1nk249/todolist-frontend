@@ -10,7 +10,22 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 function ResetPassword({open,onClose}) {
-    const router = useRouter();
+ 
+  const router = useRouter();
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    if (router.isReady) {
+      const { token } = router.query;
+      setToken(token);
+    }
+  }, [router.isReady, router.query]);
+  if (!router.isReady || !token) {
+    // Render a loading state or return null until the router is ready
+    return <p>Loading...</p>;
+  }
+
+
 
 const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -21,7 +36,8 @@ const [confirmPassword, setConfirmPassword] = useState("");
   const toggleShowConfirmPassword = () =>
     setShowConfirmPassword(!showConfirmPassword);
 
-  const { token } = router.query;
+ 
+
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,7 +47,7 @@ const [confirmPassword, setConfirmPassword] = useState("");
       return;
     }
 
-    fetch(`${apiUrl}/users/reset-password/${token}`, {
+    fetch(`${apiUrl}/reset-password/${token}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ password: signInPassword }),
@@ -45,6 +61,7 @@ const [confirmPassword, setConfirmPassword] = useState("");
          toast.error(toastMessages.error.errorOccured)
         }
     })
+   
 }
   return (
 
