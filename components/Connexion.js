@@ -13,7 +13,7 @@ import { signIn } from "../features/userSlice";
 import apiUrl from "../config";
 
 
-const Connexion = ({ open, onClose }) => {
+const Connexion = ({ open, onClose,token }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showForgottenPassword, setShowForgottenPassword] = useState(false);  // Utilisation de useState
@@ -171,7 +171,7 @@ fetch(`${apiUrl}/users/signin`,{
   <ForgottenPassword open={showForgottenPassword} onClose={handleCloseForgottenPassword} />
 
 )}
-  <ResetPassword open={showResetPassword} onClose={handleCloseResetPassword} />
+  <ResetPassword open={showResetPassword} onClose={handleCloseResetPassword} token={token} />
       </>
     );
   };

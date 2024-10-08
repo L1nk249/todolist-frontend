@@ -260,7 +260,7 @@ export default function Header() {
       </Box>
 
       {/* Modal de connexion */}
-      <Connexion open={open} onClose={handleClose} />
+      <Connexion open={open} onClose={handleClose} token={token}/>
      
     </>
   );

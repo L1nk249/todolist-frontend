@@ -9,22 +9,7 @@ import { Dialog, TextField, Box, Button, DialogTitle, DialogContent, DialogActio
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-function ResetPassword({open,onClose}) {
- 
-  const router = useRouter();
-  const [token, setToken] = useState(null);
-
-  useEffect(() => {
-    if (router.isReady) {
-      const { token } = router.query;
-      setToken(token);
-    }
-  }, [router.isReady, router.query]);
-  if (!router.isReady || !token) {
-    // Render a loading state or return null until the router is ready
-    return <p>Loading...</p>;
-  }
-
+function ResetPassword({open,onClose,token}) {
 
 
 const [confirmPassword, setConfirmPassword] = useState("");
