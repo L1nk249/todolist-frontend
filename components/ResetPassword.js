@@ -2,7 +2,6 @@
 
 
 import React, { useState } from "react";
-import { useRouter } from "next/router";
 import apiUrl from "../config";
 import toastMessages from "../config/toastMessages";
 import { Dialog, TextField, Box, Button, DialogTitle, DialogContent, DialogActions, InputAdornment, IconButton } from "@mui/material";
@@ -10,7 +9,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 function ResetPassword({open,onClose,token}) {
-
+ 
 
 const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -26,19 +25,26 @@ const [confirmPassword, setConfirmPassword] = useState("");
   
   const handleSubmit = (e) => {
     e.preventDefault();
-
+const passwordRegex = /^(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?])(?=.*[0-9])[A-Za-z0-9!@#$%^&*()_+[\]{};':"\\|,.<>/?]{8,}$/
+if (!passwordRegex.test(password)) {// Si le password ne correspond pas (test method) alors alert error 
+  toast.warning(toastMessages.warning.invalidPassword)
+  return;
+}
     if (signInPassword !== confirmPassword) {
      toast.error(toastMessages.error.incorrectPassword)
       return;
+
+
     }
 
-    fetch(`${apiUrl}/reset-password/${token}`, {
+    fetch(`${apiUrl}/users/reset-password?token=${token}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ password: signInPassword }),
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log("Données reçues du serveur :", data)
         if (data.result) {
       toast.success(toastMessages.success.passwordReset)
           .then(() => router.push("/")); // Rediriger vers la page de connexion

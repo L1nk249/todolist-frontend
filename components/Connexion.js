@@ -167,11 +167,20 @@ fetch(`${apiUrl}/users/signin`,{
         </DialogActions>
         </Box>
       </Dialog>
-      {showForgottenPassword && (  // pour éviter d'afficher le composant automatiquement mais uniquement quand c'est voulu 
-  <ForgottenPassword open={showForgottenPassword} onClose={handleCloseForgottenPassword} />
-
+      {showForgottenPassword && (
+  <ForgottenPassword 
+    open={showForgottenPassword} 
+    onClose={handleCloseForgottenPassword} 
+  />
 )}
-  <ResetPassword open={showResetPassword} onClose={handleCloseResetPassword} token={token} />
+
+{token && (
+  <ResetPassword  
+  open={showResetPassword}
+    onClose={handleCloseResetPassword} 
+    token={token} 
+  />
+)}
       </>
     );
   };
