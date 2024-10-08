@@ -1,15 +1,25 @@
 "use client";
 
 
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import apiUrl from "../config";
 import toastMessages from "../config/toastMessages";
 import { Dialog, TextField, Box, Button, DialogTitle, DialogContent, DialogActions, InputAdornment, IconButton } from "@mui/material";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { useRouter } from "next/router";
 
-function ResetPassword({open,onClose,token}) {
- 
+function ResetPassword({onClose}) {
+  const router = useRouter();
+  const { token } = router.query; // Récupère le token de l'URL
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (token) {
+      setOpen(true); // Ouvrir la modal si le token est présent
+    }
+  }, [token]);
+
 
 const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
