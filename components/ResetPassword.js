@@ -1,36 +1,25 @@
 "use client";
 
 
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import apiUrl from "../config";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import toastMessages from "../config/toastMessages";
 import { Dialog, TextField, Box, Button, DialogTitle, DialogContent, DialogActions, InputAdornment, IconButton } from "@mui/material";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { useRouter } from "next/router";
 
-function ResetPassword({onClose}) {
-  const router = useRouter();
+
+function ResetPassword({onClose,token}) {
+ 
   const [open, setOpen] = useState(false);
   const [signInPassword, setSignInPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  
 
-    const { token } = router.query; // Récupère le token de l'URL
-    useEffect(() => {
-      if (!router.isReady) return; // Vérifie que le router est prêt
-      const { token } = router.query; // Récupère le token de l'URL
-  
-      if (token) {
-        console.log("Token trouvé :", token);
-        setOpen(true);
-      } else {
-        console.error("Token manquant.");
-      }
-    }, [router.isReady, router.query]);
   
 
   const toggleShowPassword = () => setShowPassword(!showPassword);
@@ -43,7 +32,7 @@ function ResetPassword({onClose}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 const passwordRegex = /^(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?])(?=.*[0-9])[A-Za-z0-9!@#$%^&*()_+[\]{};':"\\|,.<>/?]{8,}$/
-if (!passwordRegex.test(signInPasswordpassword)) {// Si le password ne correspond pas (test method) alors alert error 
+if (!passwordRegex.test(signInPassword)) {// Si le password ne correspond pas (test method) alors alert error 
   toast.warning(toastMessages.warning.invalidPassword)
   return;
 }

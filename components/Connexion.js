@@ -12,7 +12,7 @@ import { signIn } from "../features/userSlice";
 import apiUrl from "../config";
 
 
-const Connexion = ({ open, onClose,token }) => {
+const Connexion = ({ open, onClose, }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showForgottenPassword, setShowForgottenPassword] = useState(false);  // Utilisation de useState

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from 'next/navigation';
 import Link from "next/link"
 import Connexion from '../components/Connexion'
+import ResetPassword from '../components/ResetPassword';
 import { useState } from "react";
 import {toast } from "react-toastify"; 
 import toastMessages from "../config/toastMessages";
@@ -261,7 +262,7 @@ export default function Header() {
 
       {/* Modal de connexion */}
       <Connexion open={open} onClose={handleClose} token={token}/>
-     
+      <ResetPassword token={token} />
     </>
   );
 }
