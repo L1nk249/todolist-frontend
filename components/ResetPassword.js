@@ -11,20 +11,27 @@ import { useRouter } from "next/router";
 
 function ResetPassword({onClose}) {
   const router = useRouter();
-  const { token } = router.query; // Récupère le token de l'URL
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (token) {
-      setOpen(true); // Ouvrir la modal si le token est présent
-    }
-  }, [token]);
-
-
-const [confirmPassword, setConfirmPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [signInPassword, setSignInPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  
+
+    const { token } = router.query; // Récupère le token de l'URL
+    useEffect(() => {
+      if (!router.isReady) return; // Vérifie que le router est prêt
+      const { token } = router.query; // Récupère le token de l'URL
+  
+      if (token) {
+        console.log("Token trouvé :", token);
+        setOpen(true);
+      } else {
+        console.error("Token manquant.");
+      }
+    }, [router.isReady, router.query]);
+  
 
   const toggleShowPassword = () => setShowPassword(!showPassword);
   const toggleShowConfirmPassword = () =>
@@ -33,10 +40,10 @@ const [confirmPassword, setConfirmPassword] = useState("");
  
 
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 const passwordRegex = /^(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?])(?=.*[0-9])[A-Za-z0-9!@#$%^&*()_+[\]{};':"\\|,.<>/?]{8,}$/
-if (!passwordRegex.test(password)) {// Si le password ne correspond pas (test method) alors alert error 
+if (!passwordRegex.test(signInPasswordpassword)) {// Si le password ne correspond pas (test method) alors alert error 
   toast.warning(toastMessages.warning.invalidPassword)
   return;
 }
@@ -47,23 +54,28 @@ if (!passwordRegex.test(password)) {// Si le password ne correspond pas (test me
 
     }
 
-    fetch(`${apiUrl}/users/reset-password?token=${token}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password: signInPassword }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Données reçues du serveur :", data)
+    try {
+      const response = await fetch(`${apiUrl}/users/reset-password?token=${token}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: signInPassword }),
+      });
+      const data = await response.json();
+
+      console.log("Données reçues du serveur :", data);
+
         if (data.result) {
       toast.success(toastMessages.success.passwordReset)
-          .then(() => router.push("/")); // Rediriger vers la page de connexion
+      setTimeout(() => { onClose()
+        router.push("/");}, 1500)
+    
         } else {
          toast.error(toastMessages.error.errorOccured)
+        }}
+        catch(error) {
+          console.error("Erreur:", error);
         }
-    })
-   
-}
+    };
   return (
 
     <Dialog open={open} onClose={onClose}>
