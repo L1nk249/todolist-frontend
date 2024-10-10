@@ -83,7 +83,7 @@ if (!passwordRegex.test(signInPassword)) {// Si le password ne correspond pas (t
             onChange={(e) => setSignInPassword(e.target.value)}
             required
             sx={{ 
-              mb: 2, // Marge en bas pour espacer les champs
+              mb: 2, // Marge en bas ->>  espacer les champs
               height: "5vh", 
               width: "15vw",
               '& .MuiInputBase-input': { fontSize: '1.5rem' }, // Taille de la police d'entrée
