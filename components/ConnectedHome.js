@@ -5,47 +5,12 @@ import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import { useState } from "react";
 import { toast } from "react-toastify"; 
 import 'react-toastify/dist/ReactToastify.css';
-import toastMessages from "../config/toastMessages";
+
 
 export default function ConnectedHome() {
-  const [todos, setTodos] = useState([]); //liste des todos 
-  const [todo, setTodo] = useState("")  //to do en cours d'écriture
-  const [openModal, setOpenModal] = useState(false); // Gérer la visibilité de la modale (Connexion)
-
-  const handleAdd = () => {
-    if (todo.trim() === '') {// .trim()  valide les saisies utilisateur, pour éviter que des espaces ne soient pris en compte comme des caractères valides. trim()==='' alors tt est vide.
-      toast.error(toastMessages.error.emptyField)
-      return;
-    }
-    
-    if (todos.includes(todo)) {
-      toast.warning(toastMessages.warning.existingTodo)
-       
-      return;
-    }
-
-   if (todos.length>9){
-    toast.info(toastMessages.info.limitReached)
-    setTimeout(() => {
-      setOpenModal(true)
-    }, 2000);
-
-   } else {setTodos((prev) => [...prev, todo]);// si todo pas superieur à 9 alors rajoute les todos à la liste et réinitialise le champ de saisie.
-    setTodo("");}
-
-  };
-
-  const handleDelete = (index) => {  // index représente la position d'un todo spécifique dans le tableau todos)
-    setTodos((prev) => prev.filter((_, i) => i !== index)); // i!== index signifie que tu gardes tous les todos dont l'index (i) n'est pas égal à celui que tu veux supprimer/
-    // _ = on ignore le premier parametre on ne prend que i en compte/
-    toast.info(toastMessages.info.deletedTodo)
-  };
-  const closeModal = () => {
-    setOpenModal(false); // ferme la modal l
-  };
+  
 return (
         <>
-        <Connexion open={openModal} onClose={closeModal} />
    
          <div
       style={{
@@ -53,7 +18,7 @@ return (
         position: 'fixed', // Permet à l'image de rester fixe
         top: 0,
         left: 0,
-        backgroundImage: 'url(/todobis.jpeg)', // chemin relatif à l'image
+        backgroundImage: 'url(/backgroundBisConnected.jpeg)', // chemin relatif à l'image
         backgroundSize: 'cover', // couvre toute la zone
         backgroundAttachment: 'fixed',
         backgroundPosition: 'center', // centre l'image
@@ -63,60 +28,13 @@ return (
         zIndex: -1, // met l'image en arrière-plan
       }}
     >
-      
-    </div>
-
-    
-          <Grid container justifyContent="center" alignItems="center" spacing={2} style={{ padding: '20px 0',marginTop:'165px' }}>
-            </Grid>
-            <Grid item xs={12}>
-              <Box>
-                <Grid container justifyContent="center" alignItems="center"spacing={2}>
-                  <Grid item xs={2}>
-                    <TextField
-                      id="outlined-basic"
-                      placeholder='Ecrivez votre Todo'
-                      variant="outlined"
-                      fullWidth
-                      sx={{ 
-                        '& .MuiInputBase-input': { fontSize: '1.5rem' }, // Taille de la police
-                        '& .MuiFormLabel-root': { fontSize: '1.25rem' }, // Taille de l'étiquette
-                        '& .MuiInputBase-root': {
-                          backgroundColor: "white", 
-                           height: "56px"
-                      }}}
-                      value={todo}
-                      onChange={(e) => setTodo(e.target.value)}
-                    />
-                  </Grid>
-                  <Grid item xs={2}>
-                    <Button
-                      variant="contained"
-                      fullWidth
-                      sx={{  height: "56px",fontSize: {
-                        xs: "0.7rem",  // Petits écrans (mobile)
-                        sm: "1rem",  // Écrans moyens (tablettes)
-                        md: "1.2rem",  // Écrans plus grands (ordinateurs)
-                        lg: "1,5rem",  // Très grands écrans
-                      },
-                        }}
-                      onClick={handleAdd}
-                    >
-                      Ajouter un ToDo
-                    </Button>
-                  </Grid>
-                
-
-                  <Grid item xs={12}>
-                    <ul style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 0 }}>
-                      {todos.map((todo, index) => (
-                          <li key={index} style={{ display: 'flex', alignItems: 'center', fontSize: '2rem', margin: '10px 0', color: 'black' }}> 
-                           <Box
+ 
+ <Box
                         sx={{
                           display: "flex",
                           alignItems: "center",
+                          flexDirection: "column",
                           justifyContent: "space-between",
-                          background: "linear-gradient(to right top, #d1c26b, #d6c370, #dac575, #dec67a, #e2c87f, #e5c67d, #e8c37b, #ebc179, #efba71, #f3b269, #f7aa64, #fba15f)",
                           color: "#333", // Couleur du texte
                           padding: "10px 20px",
                           borderRadius: "25px", // Bordure arrondie pour effet capsule
@@ -125,23 +43,36 @@ return (
                           minWidth: "800px", // Largeur minimum pour la capsule
                           maxWidth: "800px", // Largeur maximum
                           width: "100%", // Ajuste la largeur au contenu
+                          textAlign: "center"
                         }}
                       >
-                        <NoteAltIcon fontSize="small" sx={{ color: "rgb(24,118,210)", marginRight: "10px" }} />
-                        {todo}
-                        <Button aria-label="delete" onClick={() => handleDelete(index)} sx={{ marginLeft: "20px" }}>
-                          <DeleteForeverIcon fontSize="large" sx={{ color: "red" }} />
-                        </Button>
                       </Box>
-                      
-                        </li>
-                      ))}
-                    </ul>
-                  </Grid>
-                </Grid>
-              </Box> 
-            </Grid>
-          
-        </>
-      );
+                      <Box
+    component="img"
+    src="/chemin-de-ton-image.jpg" // Remplace par le chemin de ton image
+    alt="Description de l'image"
+    sx={{
+      width: "100%", // Prend toute la largeur disponible
+      maxWidth: "300px", // Taille maximale de l'image pour limiter la largeur
+      height: "auto", // Maintient les proportions de l'image
+      borderRadius: "15px", // Arrondi les coins de l'image
+      marginBottom: "20px", // Espace entre l'image et le texte
+    }}
+  />
+
+  {/* Titre en dessous de l'image */}
+  <Typography
+    variant="h5"
+    sx={{
+      fontSize: "1.5rem", // Taille du titre
+      color: "#333", // Couleur du titre
+      fontWeight: "bold", // Style gras pour le titre
+    }}
+  >
+    Titre de ton cadre
+  </Typography>
+</Box>
+    </div>
+)
+
   }
