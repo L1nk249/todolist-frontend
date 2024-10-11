@@ -1,7 +1,5 @@
 "use client";
-import { Box, TextField, Button, Grid } from "@mui/material";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import NoteAltIcon from '@mui/icons-material/NoteAlt';
+import { Box, TextField, Button,Typography, Grid } from "@mui/material";
 import { useState } from "react";
 import { toast } from "react-toastify"; 
 import 'react-toastify/dist/ReactToastify.css';
@@ -46,7 +44,7 @@ return (
                           textAlign: "center"
                         }}
                       >
-                      </Box>
+                
                       <Box
     component="img"
     src="/chemin-de-ton-image.jpg" // Remplace par le chemin de ton image
@@ -73,6 +71,8 @@ return (
   </Typography>
 </Box>
     </div>
+        </>
+
 )
 
   }

@@ -56,7 +56,7 @@ fetch(`${apiUrl}/users/signin`,{
       setEmail("");
       setPassword("");
       onClose()
-      router.push("/");//on reinitialise les etats et on redirige sur Home
+      router.push("/ConnectedHome");//on reinitialise les etats et on redirige sur Home
     } else {
       toast.error (toastMessages.error.incorrectField)
     
