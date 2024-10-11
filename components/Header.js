@@ -78,7 +78,9 @@ export default function Header() {
 
 
   const handleClick = () => {
-    router.push("/");}
+    if (token){router.push("/connectedHome")}
+    else{
+    router.push("/");}}
   
     return (
       <>
