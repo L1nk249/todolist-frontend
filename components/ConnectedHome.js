@@ -1,8 +1,21 @@
 "use client";
 import { Box, Typography,Grid } from "@mui/material";
-import { useState } from "react";
+import { useRouter } from 'next/navigation';
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+
+
+export default function ConnectedHome() {
+const router=useRouter()
+
+const handleBricolageCLick=()=>{router.push('/Bricolage')}
+const handleEcoleCLick=()=>{router.push('/Ecole')}
+const handleSportCLick=()=>{router.push('/Sport')}
+const handleCoursesCLick=()=>{router.push('/Courses')}
+const handleSauvegardeCLick=()=>{router.push('/Sauvegarde')}
+
+
+
 
 // Composant réutilisable pour une section avec image et titre
 const Section = ({ imageSrc, altText, title }) => (
@@ -44,6 +57,10 @@ const Section = ({ imageSrc, altText, title }) => (
         fontSize: "2.5rem", // Taille du titre
         color: "#996868", // Couleur du titre
         fontWeight: "bold", // Style gras pour le titre
+        '&:hover': {
+          color: '#2886D3'
+        },
+        cursor: 'pointer'
       }}
     >
       {title}
@@ -51,7 +68,7 @@ const Section = ({ imageSrc, altText, title }) => (
   </Box>
 );
 
-export default function ConnectedHome() {
+
   return (
     <>
       <div
@@ -87,19 +104,19 @@ export default function ConnectedHome() {
         >
           {/* Chaque élément occupe 6 colonnes sur un total de 12 (soit deux éléments par ligne) */}
           <Grid item xs={12} sm={6} md={4}>
-            <Section imageSrc="/bricolage.jpeg" altText="Bricolage" title="Bricolage" />
+            <Section imageSrc="/bricolage.jpeg" altText="Bricolage" title="Bricolage" onClick={handleBricolageCLick}/>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <Section imageSrc="/ecole.jpeg" altText="Ecole" title="Ecole" />
+            <Section imageSrc="/ecole.jpeg" altText="Ecole" title="Ecole"onClick={handleEcoleCLick} />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <Section imageSrc="/sport.jpeg" altText="Sport" title="Sport" />
+            <Section imageSrc="/sport.jpeg" altText="Sport" title="Sport"onClick={handleSportCLick}  />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <Section imageSrc="/courses.jpeg" altText="Liste de courses" title="Liste de courses" />
+            <Section imageSrc="/courses.jpeg" altText="Liste de courses" title="Liste de courses"onClick={handleCoursesCLick}  />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <Section imageSrc="/todos.jpeg" altText="Todos sauvegardés" title="Todos sauvegardés" />
+            <Section imageSrc="/todos.jpeg" altText="Todos sauvegardés" title="Todos sauvegardés" onClick={handleSauvegardeCLick}/>
           </Grid>
         </Grid>
       </div>
