@@ -18,8 +18,9 @@ const handleSauvegardeCLick=()=>{router.push('/Sauvegarde')}
 
 
 // Composant réutilisable pour une section avec image et titre
-const Section = ({ imageSrc, altText, title }) => (
+const Section = ({ imageSrc, altText, title,onClick }) => (
   <Box
+  onClick={onClick}
     sx={{
       display: "flex",
       alignItems: "center",
