@@ -22,6 +22,23 @@ export default function Header() {
   const [open, setOpen] = useState(false);// etat pour la modal 
 
 
+ const isSportPage = router.pathname === '/Sport'
+ const isCoursePage = router.pathname === '/Course'
+ const isEcolePage = router.pathname === '/Ecole'
+  const isBricolagePage = router.pathname === '/Bricolage'
+  const isSauvegardePage=router.pathname === '/Sauvegarde'
+
+  const headerBackgroundColor = () => {
+    if (isSportPage) return 'yellow';
+    if (isCoursePage) return 'black';
+    if (isEcolePage) return 'green';
+    if (isBricolagePage) return 'blue';
+    if (isSauvegardePage) return 'red';
+    return  "  linear-gradient(to right top, #d1c26b, #d6c370, #dac575, #dec67a, #e2c87f, #e5c67d, #e8c37b, #ebc179, #efba71, #f3b269, #f7aa64, #fba15f);"; // Couleur par défaut si aucune condition n'est remplie
+  };
+
+
+
   const handleOpen = () => {
     setOpen(true);  // handleOpen ouvre la modal (en appelant <connexion open/onCLose>)
   };
@@ -88,7 +105,7 @@ export default function Header() {
         py: 1,
         px: 2,
         mt: "auto",
-        background: "  linear-gradient(to right top, #d1c26b, #d6c370, #dac575, #dec67a, #e2c87f, #e5c67d, #e8c37b, #ebc179, #efba71, #f3b269, #f7aa64, #fba15f);",
+        background:headerBackgroundColor(),
         textAlign: "center",
         position: "fixed", // Position fixe
         top: 0, // Aligné en bas
@@ -118,10 +135,10 @@ export default function Header() {
                 onClick={handleClick}
              ></Image>
             </Grid>
-
             
            {token ? (  
             <>
+            
             {/* Menu pour utilisateur authentifié */}
             <Typography variant="body1" sx={{ textAlign: "left", flex: 1 }}>
               <Link href="/">
@@ -207,16 +224,8 @@ export default function Header() {
             </Typography>
 
 
-
           </>
-
-
-
-
-
-
-
-
+        
 
 
         ) : (
@@ -281,6 +290,7 @@ export default function Header() {
             </Typography>
           </>
         )}
+         
       </Box>
 
       {/* Modal de connexion */}
