@@ -123,7 +123,7 @@ export default function Header() {
            {token ? (  
             <>
             {/* Menu pour utilisateur authentifié */}
-            <Typography variant="body1" sx={{ textAlign: "left", flex: 1, mr: 50 }}>
+            <Typography variant="body1" sx={{ textAlign: "left", flex: 1 }}>
               <Link href="/">
                 <Typography
                   component="span"
@@ -142,6 +142,29 @@ export default function Header() {
                 </Typography>
               </Link>
             </Typography>
+
+            <Typography variant="body1" sx={{ textAlign: "left", flex: 1 }}>
+              <Link href="/ConnectedHome">
+                <Typography
+                  component="span"
+                  sx={{
+                    fontSize: '1.5rem',
+                    color: 'black',
+                    textDecoration: 'none',
+                    display: 'inline-block',
+                    transition: 'color 0.3s ease',
+                    '&:hover': {
+                      color: 'white',
+                    },
+                  }}
+                >
+                  Menu
+                </Typography>
+              </Link>
+            </Typography>
+
+
+
 
             <Typography variant="body2" sx={{ textAlign: "center", flex: 1 }}>
               <Typography

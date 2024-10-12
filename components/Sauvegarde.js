@@ -19,7 +19,7 @@ return (
         position: 'fixed', // Permet à l'image de rester fixe
         top: 0,
         left: 0,
-        backgroundImage: 'url(/bricolage.jpeg)', // chemin relatif à l'image
+        backgroundImage: 'url(/sauvegarde.jpeg)', // chemin relatif à l'image
         backgroundSize: 'cover', // couvre toute la zone
         backgroundAttachment: 'fixed',
         backgroundPosition: 'center', // centre l'image
