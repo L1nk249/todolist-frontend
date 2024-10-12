@@ -88,6 +88,8 @@ return (
                         md: "1.2rem",  // Écrans plus grands (ordinateurs)
                         lg: "1,5rem",  // Très grands écrans
                       },
+                      backgroundColor: "#902F66", // Couleur de fond du bouton
+                      color: "white", // Couleur du texte du bouton
                         }}
                       onClick={handleAdd}
                     >

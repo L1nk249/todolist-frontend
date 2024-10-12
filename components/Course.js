@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import toastMessages from "../config/toastMessages";
 
-export default function Courses() {
+export default function Course() {
   const [todos, setTodos] = useState([]); //liste des todos 
   const [todo, setTodo] = useState("")  //to do en cours d'écriture
 
@@ -88,6 +88,8 @@ return (
                         md: "1.2rem",  // Écrans plus grands (ordinateurs)
                         lg: "1,5rem",  // Très grands écrans
                       },
+                      backgroundColor: "#996868", // Couleur de fond du bouton
+                      color: "white", // Couleur du texte du bouton
                         }}
                       onClick={handleAdd}
                     >

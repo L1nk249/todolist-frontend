@@ -11,7 +11,7 @@ const router=useRouter()
 const handleBricolageCLick=()=>{router.push('/Bricolage')}
 const handleEcoleCLick=()=>{router.push('/Ecole')}
 const handleSportCLick=()=>{router.push('/Sport')}
-const handleCoursesCLick=()=>{router.push('/Courses')}
+const handleCourseCLick=()=>{router.push('/Course')}
 const handleSauvegardeCLick=()=>{router.push('/Sauvegarde')}
 
 
@@ -114,7 +114,7 @@ const Section = ({ imageSrc, altText, title,onClick }) => (
             <Section imageSrc="/sport.jpeg" altText="Sport" title="Sport"onClick={handleSportCLick}  />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <Section imageSrc="/courses.jpeg" altText="Liste de courses" title="Liste de courses"onClick={handleCoursesCLick}  />
+            <Section imageSrc="/courses.jpeg" altText="Liste de courses" title="Liste de courses"onClick={handleCourseCLick}  />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <Section imageSrc="/todos.jpeg" altText="Todos sauvegardés" title="Todos sauvegardés" onClick={handleSauvegardeCLick}/>
