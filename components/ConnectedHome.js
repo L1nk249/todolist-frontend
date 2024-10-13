@@ -2,11 +2,21 @@
 import { Box, Typography,Grid } from "@mui/material";
 import { useRouter } from 'next/navigation';
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 import 'react-toastify/dist/ReactToastify.css';
 
 
-export default function ConnectedHome({onPageChange}){
+export default function ConnectedHome({activePage,onPageChange}){
 const router=useRouter()
+
+useEffect(() => {
+  // Effectue un changement de la page lorsque le composant se monte
+  onPageChange(activePage); // 'activePage' doit être passé comme prop
+}, [activePage]);
+
+
+
+
 
 const handleBricolageClick = () => {
   onPageChange('Bricolage');

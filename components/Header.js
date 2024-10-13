@@ -14,6 +14,7 @@ import { logout } from "../features/userSlice";
 import Swal from "sweetalert2";
 import apiUrl from "../config";
 import { useSelector } from "react-redux";
+import { DataGrid } from '@mui/x-data-grid';
 
 export default function Header() {
   const router = useRouter();
@@ -274,7 +275,7 @@ export default function Header() {
       {/* Modal de connexion */}
       <Connexion open={open} onClose={handleClose} token={token} />
       <ResetPassword token={token} />
-      <ConnectedHome onPageChange={handlePageChange} />
+      <ConnectedHome activePage={activePage} onPaginationModelChange={handlePageChange} />
     </>
   );
 }
