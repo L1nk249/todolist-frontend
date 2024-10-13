@@ -1,145 +1,135 @@
 "use client";
-import { Box, Typography,Grid, } from "@mui/material";
+import { Box, Typography, Grid } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
-import Link from "next/link"
-import Connexion from '../components/Connexion'
+import Link from "next/link";
+import Connexion from '../components/Connexion';
 import ResetPassword from '../components/ResetPassword';
+import ConnectedHome from "./ConnectedHome";
 import { useState } from "react";
-import {toast } from "react-toastify"; 
+import { toast } from "react-toastify";
 import toastMessages from "../config/toastMessages";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../features/userSlice"
+import { useDispatch } from "react-redux";
+import { logout } from "../features/userSlice";
 import Swal from "sweetalert2";
 import apiUrl from "../config";
+import { useSelector } from "react-redux";
 
 export default function Header() {
-
-  const dispatch = useDispatch();//
-  const router = useRouter()
-  const token = useSelector((state) => state.user.value.token) //le reducer va chercher la valeur du token pour dire si user connected ou non
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.user.value.token);
   console.log("Token in Header:", token);
-  const [open, setOpen] = useState(false);// etat pour la modal 
+  const [open, setOpen] = useState(false);
+  const [activePage, setActivePage] = useState("");
 
-
- const isSportPage = router.pathname === '/Sport'
- const isCoursePage = router.pathname === '/Course'
- const isEcolePage = router.pathname === '/Ecole'
-  const isBricolagePage = router.pathname === '/Bricolage'
-  const isSauvegardePage=router.pathname === '/Sauvegarde'
-
-  const headerBackgroundColor = () => {
-    if (isSportPage) return 'yellow';
-    if (isCoursePage) return 'black';
-    if (isEcolePage) return 'green';
-    if (isBricolagePage) return 'blue';
-    if (isSauvegardePage) return 'red';
-    return  "  linear-gradient(to right top, #d1c26b, #d6c370, #dac575, #dec67a, #e2c87f, #e5c67d, #e8c37b, #ebc179, #efba71, #f3b269, #f7aa64, #fba15f);"; // Couleur par défaut si aucune condition n'est remplie
+  // Fonction pour changer la page active
+  const handlePageChange = (page) => {
+    console.log('Page active:', page);  // Debug
+    setActivePage(page);  // Mets à jour l'état de la page active
   };
 
-
+  const headerBackgroundColor = () => {
+    switch (activePage) {
+      case 'Sport':
+        return "#902F66";
+      case 'Course':
+        return "#996868";
+      case 'Ecole':
+        return "#CE5E5E";
+      case 'Bricolage':
+        return 'blue';
+      case 'Sauvegarde':
+        return 'white';
+      default:
+        return "linear-gradient(to right top, #d1c26b, #d6c370, #dac575, #dec67a, #e2c87f, #e5c67d, #e8c37b, #ebc179)";
+    }
+  };
 
   const handleOpen = () => {
-    setOpen(true);  // handleOpen ouvre la modal (en appelant <connexion open/onCLose>)
+    setOpen(true);  // Ouvre la modal
   };
 
   const handleClose = () => {
-    setOpen(false);// pour fermer la modal 
+    setOpen(false); // Ferme la modal
   };
 
   const handleLogout = () => {
     dispatch(logout());
-    toast.success(toastMessages.success.disconnected)}
-      
+    toast.success(toastMessages.success.disconnected);
+  };
 
-    const handleDelete = async () => {
-      // Async await pour attendre la validation de l'user avant de supprimer ou pas le profil
-  
-      const proceed = await Swal.fire({
-        title: "Êtes-vous sûr ?",
-        text: "Vous ne pourrez pas revenir en arrière !",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Oui, supprimer !",
-        cancelButtonText: "Annuler",
-        timer: 50000,
-      });
-  
-      console.log(proceed);
-      if (proceed.isConfirmed) {
-        // proceed.isConfirmed car lié à swal.)
-        //  on appelle la route delete avec le param token ( pas besoin de req.body on veut tt supprimer)
-        fetch(`${apiUrl}/users/delete/${token}`, {
-          method: "DELETE",
-          headers: { "Content-Type": "application/json" },
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            {
-              if (data.result) {
-                // Si data alors supprime le compte, logout le user et renvoie sur home
-                dispatch(logout());
-                router.push("/");
-              }
-            }
-          });
-      }
-    };
+  const handleDelete = async () => {
+    const proceed = await Swal.fire({
+      title: "Êtes-vous sûr ?",
+      text: "Vous ne pourrez pas revenir en arrière !",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Oui, supprimer !",
+      cancelButtonText: "Annuler",
+      timer: 50000,
+    });
 
-
-
-
-
+    if (proceed.isConfirmed) {
+      fetch(`${apiUrl}/users/delete/${token}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.result) {
+            dispatch(logout());
+            router.push("/");
+          }
+        });
+    }
+  };
 
   const handleClick = () => {
-   router.push("/");}
-  
-    return (
-      <>
+    router.push("/");
+  };
+
+  return (
+    <>
       <Box
-      component="header"
-      sx={{
-        py: 1,
-        px: 2,
-        mt: "auto",
-        background:headerBackgroundColor(),
-        textAlign: "center",
-        position: "fixed", // Position fixe
-        top: 0, // Aligné en bas
-        left: 0, // Prend toute la largeur
-        right: 0, // Prend toute la largeur
-        width: "100%", // Assure que le header est large
-        display: "flex", // Utilisation de flexbox pour l'agencement
-        justifyContent: "space-between", // Distribue les éléments à gauche, centre et droite
-        alignItems: "center", // Centre verticalement
-        minHeight: "50px",
-        cursor: 'pointer',
-        opacity:0.8
-      }}
-      
+        component="header"
+        sx={{
+          py: 1,
+          px: 2,
+          background: headerBackgroundColor(),
+          textAlign: "center",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          minHeight: "50px",
+          cursor: 'pointer',
+          opacity: 0.8
+        }}
       >
-      <Grid item xs={12} sm={6} container justifyContent="left"> 
-              <Image
-                src="/toutdoux.jpeg"   
-                alt="logo" 
-                width={90} 
-                height={90}  
-                style={{
-                    borderRadius:"30%",
-                  objectFit: 'contain' ,
-                  marginBottom: "20px", // Ajuste l'espace sous l'image
-                }}
-                onClick={handleClick}
-             ></Image>
-            </Grid>
-            
-           {token ? (  
-            <>
-            
-            {/* Menu pour utilisateur authentifié */}
+        <Grid item xs={12} sm={6} container justifyContent="left">
+          <Image
+            src="/toutdoux.jpeg"
+            alt="logo"
+            width={90}
+            height={90}
+            style={{
+              borderRadius: "30%",
+              objectFit: 'contain',
+              marginBottom: "20px",
+            }}
+            onClick={handleClick}
+          />
+        </Grid>
+
+        {token ? (
+          <>
             <Typography variant="body1" sx={{ textAlign: "left", flex: 1 }}>
               <Link href="/">
                 <Typography
@@ -180,9 +170,6 @@ export default function Header() {
               </Link>
             </Typography>
 
-
-
-
             <Typography variant="body2" sx={{ textAlign: "center", flex: 1 }}>
               <Typography
                 component="span"
@@ -196,11 +183,10 @@ export default function Header() {
                   },
                   cursor: 'pointer'
                 }}
-                onClick={handleLogout} // Bouton de déconnexion
+                onClick={handleLogout}
               >
                 Se déconnecter
               </Typography>
-
             </Typography>
 
             <Typography variant="body2" sx={{ textAlign: "center", flex: 1 }}>
@@ -216,21 +202,14 @@ export default function Header() {
                   },
                   cursor: 'pointer'
                 }}
-                onClick={handleDelete} // Bouton de suppression de compte
+                onClick={handleDelete}
               >
-                Supprimer son compte 
+                Supprimer son compte
               </Typography>
-
             </Typography>
-
-
           </>
-        
-
-
         ) : (
           <>
-            {/* Menu pour utilisateur non authentifié */}
             <Typography variant="body1" sx={{ textAlign: "left", flex: 1, mr: 50 }}>
               <Link href="/">
                 <Typography
@@ -264,7 +243,7 @@ export default function Header() {
                   },
                   cursor: 'pointer',
                 }}
-                onClick={handleOpen} // Ouvrir la modal de connexion
+                onClick={handleOpen}
               >
                 Se connecter
               </Typography>
@@ -290,12 +269,12 @@ export default function Header() {
             </Typography>
           </>
         )}
-         
       </Box>
 
       {/* Modal de connexion */}
-      <Connexion open={open} onClose={handleClose} token={token}/>
+      <Connexion open={open} onClose={handleClose} token={token} />
       <ResetPassword token={token} />
+      <ConnectedHome onPageChange={handlePageChange} />
     </>
   );
 }

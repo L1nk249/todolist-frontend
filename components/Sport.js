@@ -107,7 +107,7 @@ return (
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "space-between",
-                          background: "linear-gradient(to right top, #d1c26b, #d6c370, #dac575, #dec67a, #e2c87f, #e5c67d, #e8c37b, #ebc179, #efba71, #f3b269, #f7aa64, #fba15f)",
+                         
                           color: "#333", // Couleur du texte
                           padding: "10px 20px",
                           borderRadius: "25px", // Bordure arrondie pour effet capsule
