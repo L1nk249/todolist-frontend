@@ -6,6 +6,10 @@ import { useState } from "react";
 import { toast } from "react-toastify"; 
 import 'react-toastify/dist/ReactToastify.css';
 import toastMessages from "../config/toastMessages";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../features/todoSlice";
+
+
 
 export default function Bricolage() {
   const [todos, setTodos] = useState([]); //liste des todos 
@@ -36,7 +40,18 @@ export default function Bricolage() {
     // _ = on ignore le premier parametre on ne prend que i en compte/
     toast.info(toastMessages.info.deletedTodo)
   };
-  
+  const handleSave=()=>{
+    if (todos.length > 0) {
+      // Enregistrer chaque todo dans le reducer
+      todos.forEach((item) => {
+        dispatch(addTodo(item)); // Ajouter le todo dans le reducer
+      });
+toast.success(toastMessages.success.todoSaved)
+  }
+
+
+
+
 return (
         <>
    
@@ -65,7 +80,7 @@ return (
             <Grid item xs={12}>
               <Box>
                 <Grid container justifyContent="center" alignItems="center"spacing={2}>
-                  <Grid item xs={2}>
+                  <Grid item xs={3}>
                     <TextField
                       id="outlined-basic"
                       placeholder='Ecrivez votre Todo'
@@ -92,14 +107,37 @@ return (
                         md: "1.2rem",  // Écrans plus grands (ordinateurs)
                         lg: "1,5rem",  // Très grands écrans
                       },
+
                       backgroundColor: "#E67753", // Couleur de fond du bouton
                       color: "white", // Couleur du texte du bouton
                         }}
-                      onClick={handleAdd}
+                      onClick={handleSave}
                     >
                       Ajouter un ToDo
                     </Button>
                   </Grid>
+
+                  <Grid item xs={2}sx={{ marginLeft: "150px" }}>
+                    <Button
+                      variant="contained"
+                      fullWidth
+                      sx={{  height: "60px",fontSize: {
+                        xs: "0.7rem",  // Petits écrans (mobile)
+                        sm: "1rem",  // Écrans moyens (tablettes)
+                        md: "1.2rem",  // Écrans plus grands (ordinateurs)
+                        lg: "1,5rem",  // Très grands écrans
+                      },
+                      backgroundColor: "#5C6696", // Couleur de fond du bouton
+                      color: "white", // Couleur du texte du bouton
+                        }}
+                      onClick={handleSave}
+                    >
+                     Sauvegarder
+                    </Button>
+                  </Grid>
+
+
+
                 
                   <Grid item xs={12}>
                 <Box display="flex" justifyContent="space-between" flexDirection="row" width="100%">
@@ -187,4 +225,4 @@ return (
         </Grid>
     </>
   );
-}
+  }}

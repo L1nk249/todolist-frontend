@@ -3,13 +3,14 @@ const toastMessages = {
       userCreated:"Inscription réussie !",
       passwordReset:"Mot de passe réinitialisé avec succès !",
       disconnected:"Déconnecté avec succès !",
-       emailSent:"Un email a été renvoyé pour réinitialiser votre mot de passe !"
+       emailSent:"Un email a été renvoyé pour réinitialiser votre mot de passe !",
+       todoSaved:"Vos todos ont bien été sauvegardés"
       
     },
     error: {
       userNotFound: "Utilisateur non trouvé !",
       errorSubscribe:"Utilisateur déja inscrit ",
-      saveFailed: "Échec de l'enregistrement des données.",
+      saveFailed: "Échec lors de l'enregistrement des données.",
       emptyField:"Le ToDo ne peut pas être vide!",
       errorOccured:"Une erreur s'est produite:",
       missingField:"Email ou mot de passe manquant ",

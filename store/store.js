@@ -1,8 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // Utilise le localStorage par défaut
+import { persistStore, persistReducer} from 'redux-persist';
 import userReducer from '../features/userSlice';
-const persistedReducer = persistReducer(persistConfig, userReducer);
+import todoReducer from '../features/todoSlice';
+import storage from 'redux-persist/lib/storage'; // Utilise localStorage par défaut
+
+
+const persistConfig = {
+  key: 'root', // Clé principale pour le stockage
+  storage, // Utilise localStorage pour stocker l'état
+};
+const persistedReducer = persistReducer(persistConfig, userReducer,todoReducer);
 
 // Configurer le store avec le reducer persistant
 export const store = configureStore({
