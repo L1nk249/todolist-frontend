@@ -14,7 +14,7 @@ import { addTodo } from "../features/todoSlice";
 export default function Bricolage() {
   const [todos, setTodos] = useState([]); //liste des todos 
   const [todo, setTodo] = useState("")  //to do en cours d'écriture
-
+const dispatch=useDispatch()
 
   const handleAdd = () => {
     if (todo.trim() === '') {// .trim()  valide les saisies utilisateur, pour éviter que des espaces ne soient pris en compte comme des caractères valides. trim()==='' alors tt est vide.
@@ -47,6 +47,8 @@ export default function Bricolage() {
         dispatch(addTodo(item)); // Ajouter le todo dans le reducer
       });
 toast.success(toastMessages.success.todoSaved)
+setTodos([]); // Réinitialiser la liste des todos après la sauvegarde
+    }
   }
 
 
@@ -111,7 +113,7 @@ return (
                       backgroundColor: "#E67753", // Couleur de fond du bouton
                       color: "white", // Couleur du texte du bouton
                         }}
-                      onClick={handleSave}
+                      onClick={handleAdd}
                     >
                       Ajouter un ToDo
                     </Button>
@@ -225,4 +227,4 @@ return (
         </Grid>
     </>
   );
-  }}
+  }
