@@ -1,48 +1,30 @@
 "use client";
 import { Box, Typography,Grid } from "@mui/material";
 import { useRouter } from 'next/navigation';
-import { toast } from "react-toastify";
-import { useEffect } from "react";
 import 'react-toastify/dist/ReactToastify.css';
 
+export default function ConnectedHome() { // Recevoir la prop correctement
+  const router = useRouter();
 
-export default function ConnectedHome({activePage,onPageChange}){
-const router=useRouter()
+  const handleBricolageClick = () => {
+    router.push('/Bricolage');
+  };
 
-useEffect(() => {
-  // Effectue un changement de la page lorsque le composant se monte
-  onPageChange(activePage); // 'activePage' doit être passé comme prop
-}, [activePage]);
+  const handleEcoleClick = () => {
+    router.push('/Ecole');
+  };
 
+  const handleSportClick = () => {
+    router.push('/Sport');
+  };
 
+  const handleCourseClick = () => {
+    router.push('/Course');
+  };
 
-
-
-const handleBricolageClick = () => {
-  onPageChange('Bricolage');
-  router.push('/Bricolage');
-};
-
-const handleEcoleClick = () => {
-  onPageChange('Ecole');
-  router.push('/Ecole');
-};
-
-const handleSportClick = () => {
-  onPageChange('Sport');
-  router.push('/Sport');
-};
-
-const handleCourseClick = () => {
-  onPageChange('Course');
-  router.push('/Course');
-};
-
-const handleSauvegardeClick = () => {
-  onPageChange('Sauvegarde');
-  router.push('/Sauvegarde');
-};
-
+  const handleSauvegardeClick = () => {
+    router.push('/Sauvegarde');
+  };
 // Composant réutilisable pour une section avec image et titre
 const Section = ({ imageSrc, altText, title,onClick }) => (
   <Box

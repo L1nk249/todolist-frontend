@@ -1,12 +1,11 @@
 "use client";
 import { Box, Typography, Grid } from "@mui/material";
 import Image from "next/image";
-import { useRouter } from 'next/navigation';
+import { useRouter,usePathname  } from 'next/navigation';
 import Link from "next/link";
 import Connexion from '../components/Connexion';
 import ResetPassword from '../components/ResetPassword';
-import ConnectedHome from "./ConnectedHome";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { toast } from "react-toastify";
 import toastMessages from "../config/toastMessages";
 import { useDispatch } from "react-redux";
@@ -14,7 +13,6 @@ import { logout } from "../features/userSlice";
 import Swal from "sweetalert2";
 import apiUrl from "../config";
 import { useSelector } from "react-redux";
-import { DataGrid } from '@mui/x-data-grid';
 
 export default function Header() {
   const router = useRouter();
@@ -22,30 +20,30 @@ export default function Header() {
   const token = useSelector((state) => state.user.value.token);
   console.log("Token in Header:", token);
   const [open, setOpen] = useState(false);
-  const [activePage, setActivePage] = useState("");
 
-  // Fonction pour changer la page active
-  const handlePageChange = (page) => {
-    console.log('Page active:', page);  // Debug
-    setActivePage(page);  // Mets à jour l'état de la page active
-  };
-
+  const pathname = usePathname(); // On obtient la route actuelle
+ 
   const headerBackgroundColor = () => {
-    switch (activePage) {
-      case 'Sport':
+    switch (pathname) {
+      case '/Sport':
         return "#902F66";
-      case 'Course':
+      case '/Course':
         return "#996868";
-      case 'Ecole':
+        case '/Ecole':
         return "#CE5E5E";
-      case 'Bricolage':
+      case '/Bricolage':
         return 'blue';
-      case 'Sauvegarde':
+      case '/Sauvegarde':
         return 'white';
       default:
         return "linear-gradient(to right top, #d1c26b, #d6c370, #dac575, #dec67a, #e2c87f, #e5c67d, #e8c37b, #ebc179)";
     }
   };
+  // Vérifie quelle route est capturée par pathname
+  useEffect(() => {
+    console.log("Route actuelle:", pathname);
+  }, [pathname]); // Log à chaque changement de route
+
 
   const handleOpen = () => {
     setOpen(true);  // Ouvre la modal
@@ -275,7 +273,7 @@ export default function Header() {
       {/* Modal de connexion */}
       <Connexion open={open} onClose={handleClose} token={token} />
       <ResetPassword token={token} />
-      <ConnectedHome activePage={activePage} onPaginationModelChange={handlePageChange} />
+
     </>
   );
 }
