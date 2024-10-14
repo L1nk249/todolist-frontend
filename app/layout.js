@@ -1,8 +1,8 @@
 
 'use client'
-
+import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
-import store from '../store/store';
+import store, { persistor } from '../store/store';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { ToastContainer } from 'react-toastify';
@@ -24,6 +24,7 @@ export default function RootLayout({ children }) {
     <html lang="fr">
       <body>
         <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
           <ThemeProvider theme={theme}>  {/* Wrap components with ThemeProvider */}
             <Header />
             {children}
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
               position="bottom-center" {...toastOptions} />  {/* spread operator pour rajouter toutes les toastOptions à ToastContainer */}
             <Footer />
           </ThemeProvider>
+          </PersistGate>
         </Provider>
       </body>
     </html>

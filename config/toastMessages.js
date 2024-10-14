@@ -20,6 +20,7 @@ const toastMessages = {
     info: {
       welcome: "Bienvenue dans notre application !",
      limitReached: "Limite atteinte, Connectez vous pour poursuivre",
+     endOfTodos: "Limite atteinte, Veuillez recommencer une liste",
       sentMessage:"Message envoyé avec succès!",
       deletedTodo:"Todo supprimé avec succès"
     }, 

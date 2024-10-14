@@ -23,9 +23,13 @@ export default function Bricolage() {
        
       return;
     }
-    setTodos((prev) => [...prev, todo]);// Ajoute le nouveau todo à la liste
-    setTodo('');
-  };
+    if (todos.length>29){
+      toast.info(toastMessages.info.endOfTodos)
+      
+  
+     } else {setTodos((prev) => [...prev, todo]);// si todo pas superieur à 9 alors rajoute les todos à la liste et réinitialise le champ de saisie.
+      setTodo("");}
+     }
 
   const handleDelete = (index) => {  // index représente la position d'un todo spécifique dans le tableau todos)
     setTodos((prev) => prev.filter((_, i) => i !== index)); // i!== index signifie que tu gardes tous les todos dont l'index (i) n'est pas égal à celui que tu veux supprimer/
@@ -97,42 +101,90 @@ return (
                     </Button>
                   </Grid>
                 
-
                   <Grid item xs={12}>
-                    <ul style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 0 }}>
-                      {todos.map((todo, index) => (
-                          <li key={index} style={{ display: 'flex', alignItems: 'center', fontSize: '2rem', margin: '10px 0', color: 'black' }}> 
-                           <Box
+                <Box display="flex" justifyContent="space-between" flexDirection="row" width="100%">
+                  {/* Colonne de gauche */}
+                  <Box display="flex" flexDirection="column" alignItems="center" width="33%">
+                    {todos.slice(0, 10).map((todo, index) => (
+                      <Box
+                        key={index}
                         sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                          background:"#E67753",
-                          color: "white", // Couleur du texte
+                          background: "#E67753",
+                          color: "white",
                           padding: "10px 20px",
-                          borderRadius: "25px", // Bordure arrondie pour effet capsule
+                          borderRadius: "25px",
                           fontSize: "1.5rem",
-                          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // Légère ombre pour un effet de relief
-                          minWidth: "800px", // Largeur minimum pour la capsule
-                          maxWidth: "800px", // Largeur maximum
-                          width: "100%", // Ajuste la largeur au contenu
+                          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                          margin: "10px 0", // Espacement vertical entre les capsules
+                          width: "80%", // Ajuste la largeur au contenu
+                          textAlign: "center", // Centre le texte dans la capsule
                         }}
                       >
                         <NoteAltIcon fontSize="small" sx={{ color: "rgb(24,118,210)", marginRight: "10px" }} />
                         {todo}
-                        <Button aria-label="delete" onClick={() => handleDelete(index)} sx={{ marginLeft: "20px" }}>
-                          <DeleteForeverIcon fontSize="large" sx={{ color: "red" }} />
+                        <Button aria-label="delete" onClick={() => handleDelete(index)} sx={{ marginLeft: "20px", color: "white" }}>
+                          <DeleteForeverIcon fontSize="large" />
                         </Button>
                       </Box>
-                      
-                        </li>
-                      ))}
-                    </ul>
-                  </Grid>
-                </Grid>
-              </Box> 
+                    ))}
+                  </Box>
+
+                  {/* Colonne du milieu */}
+                  <Box display="flex" flexDirection="column" alignItems="center" width="33%">
+                    {todos.slice(10, 20).map((todo, index) => (
+                      <Box
+                        key={index + 10}
+                        sx={{
+                          background: "#E67753",
+                          color: "white",
+                          padding: "10px 20px",
+                          borderRadius: "25px",
+                          fontSize: "1.5rem",
+                          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                          margin: "10px 0", // Espacement vertical entre les capsules
+                          width: "80%", // Ajuste la largeur au contenu
+                          textAlign: "center", // Centre le texte dans la capsule
+                        }}
+                      >
+                        <NoteAltIcon fontSize="small" sx={{ color: "rgb(24,118,210)", marginRight: "10px" }} />
+                        {todo}
+                        <Button aria-label="delete" onClick={() => handleDelete(index + 10)} sx={{ marginLeft: "20px", color: "white" }}>
+                          <DeleteForeverIcon fontSize="large" />
+                        </Button>
+                      </Box>
+                    ))}
+                  </Box>
+
+                  {/* Colonne de droite */}
+                  <Box display="flex" flexDirection="column" alignItems="center" width="33%">
+                    {todos.slice(20, 30).map((todo, index) => (
+                      <Box
+                        key={index + 20}
+                        sx={{
+                          background: "#E67753",
+                          color: "white",
+                          padding: "10px 20px",
+                          borderRadius: "25px",
+                          fontSize: "1.5rem",
+                          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                          margin: "10px 0", // Espacement vertical entre les capsules
+                          width: "80%", // Ajuste la largeur au contenu
+                          textAlign: "center", // Centre le texte dans la capsule
+                        }}
+                      >
+                        <NoteAltIcon fontSize="small" sx={{ color: "rgb(24,118,210)", marginRight: "10px" }} />
+                        {todo}
+                        <Button aria-label="delete" onClick={() => handleDelete(index + 20)} sx={{ marginLeft: "20px", color: "white" }}>
+                          <DeleteForeverIcon fontSize="large" />
+                        </Button>
+                      </Box>
+                    ))}
+                  </Box>
+                </Box>
+              </Grid>
             </Grid>
-          
-        </>
-      );
-  }
+          </Box>
+        </Grid>
+    </>
+  );
+}
