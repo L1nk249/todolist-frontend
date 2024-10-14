@@ -4,8 +4,43 @@ import { Box, Typography, Link as MuiLink } from "@mui/material";
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import Link from "next/link"
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Footer() {
+
+  const pathname = usePathname(); // On obtient la route actuelle
+ 
+  const footerBackgroundColor = () => {
+    switch (pathname) {
+      case '/Sport':
+        return "#902F66";
+      case '/Course':
+        return "#996868";
+        case '/Ecole':
+        return "#CE5E5E";
+      case '/Bricolage':
+        return '#E67753';
+      case '/Sauvegarde':
+        return 'white';
+      default:
+        return "linear-gradient(to right top, #d1c26b, #d6c370, #dac575, #dec67a, #e2c87f, #e5c67d, #e8c37b, #ebc179)";
+    }
+  };
+  // Vérifie quelle route est capturée par pathname
+  useEffect(() => {
+    console.log("Route actuelle:", pathname);
+  }, [pathname]); // Log à chaque changement de route
+
+
+
+
+
+
+
+
+
+
   return (
     <Box // === div avec la possibilite dintegrer le css en mode mui 
   component="footer"
@@ -13,7 +48,7 @@ export default function Footer() {
     py: 3,
     px: 2,
     mt: "auto",
-    background: "linear-gradient(to right top, #d1c26b, #d6c370, #dac575, #dec67a, #e2c87f, #e5c67d, #e8c37b, #ebc179, #efba71, #f3b269, #f7aa64, #fba15f);",
+    background:footerBackgroundColor(),
     textAlign: "center",
     position: "fixed", // Position fixe
     bottom: 0, // Aligné en bas
