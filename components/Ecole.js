@@ -107,8 +107,8 @@ return (
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "space-between",
-                         
-                          color: "#333", // Couleur du texte
+                         background:"#CE5E5E",
+                          color: "white", // Couleur du texte
                           padding: "10px 20px",
                           borderRadius: "25px", // Bordure arrondie pour effet capsule
                           fontSize: "1.5rem",

@@ -32,7 +32,7 @@ export default function Header() {
         case '/Ecole':
         return "#CE5E5E";
       case '/Bricolage':
-        return 'blue';
+        return '#E67753';
       case '/Sauvegarde':
         return 'white';
       default:

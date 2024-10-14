@@ -88,7 +88,7 @@ return (
                         md: "1.2rem",  // Écrans plus grands (ordinateurs)
                         lg: "1,5rem",  // Très grands écrans
                       },
-                      backgroundColor: "black", // Couleur de fond du bouton
+                      backgroundColor: "#E67753", // Couleur de fond du bouton
                       color: "white", // Couleur du texte du bouton
                         }}
                       onClick={handleAdd}
@@ -107,7 +107,8 @@ return (
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "space-between",
-                          color: "#333", // Couleur du texte
+                          background:"#E67753",
+                          color: "white", // Couleur du texte
                           padding: "10px 20px",
                           borderRadius: "25px", // Bordure arrondie pour effet capsule
                           fontSize: "1.5rem",
