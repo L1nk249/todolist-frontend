@@ -149,7 +149,7 @@ return (
                       <Box
                         key={index}
                         sx={{
-                          background: "#E67753",
+                          background: "#996868",
                           color: "white",
                           padding: "10px 20px",
                           borderRadius: "25px",
@@ -175,7 +175,7 @@ return (
                       <Box
                         key={index + 10}
                         sx={{
-                          background: "#E67753",
+                          background: "#996868",
                           color: "white",
                           padding: "10px 20px",
                           borderRadius: "25px",
@@ -201,7 +201,7 @@ return (
                       <Box
                         key={index + 20}
                         sx={{
-                          background: "#E67753",
+                          background: "#996868",
                           color: "white",
                           padding: "10px 20px",
                           borderRadius: "25px",
