@@ -54,8 +54,8 @@ export default function Sauvegarde() {
             </Box>
           ))
         ) : (
-          <Box sx={{ color: 'white', fontSize: '1.5rem' }}>
-            Aucune Todo enregistrée.
+          <Box sx={{ color: 'whiteBlack', fontSize: '3rem' }}>
+            Aucun Todo enregistrée.
           </Box>
         )}
       </Box>
