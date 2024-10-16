@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import toastMessages from "../config/toastMessages";
 import { useDispatch } from "react-redux";
-import { addTodoSport } from "../features/todoSlice";
+import { addTodo } from "../features/todoSlice";
 
 export default function Sport() {
   const [todos, setTodos] = useState([]); //liste des todos 
@@ -39,11 +39,11 @@ export default function Sport() {
     // _ = on ignore le premier parametre on ne prend que i en compte/
     toast.info(toastMessages.info.deletedTodo)
   };
-  const handleSave=()=>{
+  const handleSave=(category)=>{
     if (todos.length > 0) {
       // Enregistrer chaque todo dans le reducer
       todos.forEach((item) => {
-        dispatch(addTodoSport(item)); // Ajouter le todo dans le reducer
+        dispatch(addTodo({ category, todo: item })); // Ajouter le todo dans le reducer
       });
 toast.success(toastMessages.success.todoSaved)
 setTodos([]); // Réinitialiser la liste des todos après la sauvegarde

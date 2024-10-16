@@ -9,6 +9,9 @@ import { removeAllTodosByCategory, selectTodos } from '../features/todoSlice'; /
 export default function Sauvegarde() {
   // Utilisez useSelector pour obtenir les todos de l'état Redux
   const todos = useSelector(selectTodos); // Assurez-vous que vous avez un sélecteur qui récupère les todos
+  const handleRemoveAllTodos = (category) => {
+    dispatch(removeAllTodosByCategory(category));
+  };
   const categories = Array.from(new Set(todos.map(todo => todo.category))); // Obtenir les catégories uniques
 
   return (
@@ -27,6 +30,7 @@ export default function Sauvegarde() {
    
         }}
       >
+        {handleRemoveAllTodos}
       </div>
 
       {/* Afficher les todos */}

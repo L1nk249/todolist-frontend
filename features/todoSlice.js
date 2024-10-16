@@ -1,44 +1,36 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-   todos:[],
+  todos: {
+    bricolage: [],
+    sport: [],
+    ecole: [],
+    courses: [],
+  },
 };
-
 export const todoSlice = createSlice({
-    name: 'todo',
-    initialState,
-    reducers: {
-      addTodoBricolage: (state, action) => {
-        state.todos.push({ text: action.payload, category: 'Bricolage' });
-      },
-
-      addTodoSport: (state, action) => {
-        state.todos.push({ text: action.payload, category: 'Sport' });
-      },
-
-      addTodoCourse: (state, action) => {
-        state.todos.push({ text: action.payload, category: 'Course' });
-      },
-
-
-      addTodoEcole: (state, action) => {
-        state.todos.push({ text: action.payload, category: 'Ecole' });
-      },
-
-
-
-      removeTodo: (state, action) => {
-        state.todos = state.todos.filter((todo, index) => index !== action.payload);
-      },
-      removeAllTodosByCategory: (state, action) => {
-        const categoryToRemove = action.payload;
-        state.todos = state.todos.filter(todo => todo.category !== categoryToRemove);
-      },
-    
-
+  name: 'todo',
+  initialState,
+  reducers: {
+    addTodo: (state, action) => {
+      const { category, todo } = action.payload; // Vérifier que l'action contient bien la catégorie et le todo
+      if (!state.todos[category]) {
+        state.todos[category] = []; // Initialiser la catégorie si elle n'existe pas
+      }
+      state.todos[category].push(todo); // Ajouter le todo à la catégorie correspondante
     },
-  });
-  export const selectTodos = (state) => state.todo.todos; 
+    removeTodo: (state, action) => {
+      const { category, index } = action.payload; // Passer la catégorie et l'index à supprimer
+      state.todos[category].splice(index, 1);
+    },
+    removeAllTodosByCategory: (state, action) => {
+      const categoryToRemove = action.payload;
+      state.todos[categoryToRemove] = []; // Réinitialiser les todos de la catégorie
+    },
+  },
+});
 
-  export const { addTodoBricolage,addTodoEcole,addTodoCourse,addTodoSport,removeTodo,removeAllTodosByCategory } = todoSlice.actions;
-  export default todoSlice.reducer;
+export const selectTodos = (state) => state.todo.todos; 
+
+export const { addTodo, removeTodo, removeAllTodosByCategory } = todoSlice.actions;
+export default todoSlice.reducer;

@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import toastMessages from "../config/toastMessages";
 import { useDispatch } from "react-redux";
-import { addTodoEcole } from "../features/todoSlice";
+import { addTodo } from "../features/todoSlice";
 
 
 export default function Ecole() {
@@ -42,7 +42,7 @@ export default function Ecole() {
     if (todos.length > 0) {
       // Enregistrer chaque todo dans le reducer
       todos.forEach((item) => {
-        dispatch(addTodoEcole(item)); // Ajouter le todo dans le reducer
+        dispatch(addTodo(item)); // Ajouter le todo dans le reducer
       });
 toast.success(toastMessages.success.todoSaved)
 setTodos([]); // Réinitialiser la liste des todos après la sauvegarde
