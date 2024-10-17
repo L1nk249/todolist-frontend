@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box,Typography,Button } from '@mui/material';
 import { removeAllTodosByCategory, selectTodos } from '../features/todoSlice'; // Assurez-vous d'importer votre sélecteur de todos
-//
+
 
 export default function Sauvegarde() {
   const dispatch=useDispatch()
