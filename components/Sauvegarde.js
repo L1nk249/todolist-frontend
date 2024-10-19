@@ -80,10 +80,6 @@ export default function Sauvegarde() {
           )}
         </Box>
         
-        {/* Footer (si nécessaire) */}
-        <Box sx={{ padding: '20px', textAlign: 'center', color: 'white', backgroundColor: 'rgba(0, 0, 0, 0.7)' }}>
-          Footer ici (si besoin)
-        </Box>
       </div>
     </>
   );
