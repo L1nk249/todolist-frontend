@@ -14,7 +14,8 @@ import { addTodo } from "../features/todoSlice";
 export default function Bricolage() {
   const [todos, setTodos] = useState([]); //liste des todos 
   const [todo, setTodo] = useState("")  //to do en cours d'écriture
-const dispatch=useDispatch()
+  const category="bricolage"
+  const dispatch=useDispatch()
 
   const handleAdd = () => {
     if (todo.trim() === '') {// .trim()  valide les saisies utilisateur, pour éviter que des espaces ne soient pris en compte comme des caractères valides. trim()==='' alors tt est vide.
@@ -44,7 +45,7 @@ const dispatch=useDispatch()
     if (todos.length > 0) {
       // Enregistrer chaque todo dans le reducer
       todos.forEach((item) => {
-        dispatch(addTodo(item)); // Ajouter le todo dans le reducer
+        dispatch(addTodo({ todo: item, category }));  // Ajouter le todo avec la catégorie
       });
 toast.success(toastMessages.success.todoSaved)
 setTodos([]); // Réinitialiser la liste des todos après la sauvegarde
