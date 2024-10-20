@@ -44,12 +44,15 @@ export default function Sport() {
     if (todos.length > 0) {
       // Enregistrer chaque todo dans le reducer
       todos.forEach((item) => {
-        dispatch(addTodo({  todo: item,category, })); // Ajouter le todo dans le reducer
+        dispatch(addTodo({ todo: item, category }));  // Ajouter le todo avec la catégorie
       });
+
 toast.success(toastMessages.success.todoSaved)
 setTodos([]); // Réinitialiser la liste des todos après la sauvegarde
     }
   }
+
+
 return (
         <>
    
