@@ -13,7 +13,7 @@ export default function Sauvegarde() {
   const handleRemoveAllTodos = (category) => {
     dispatch(removeAllTodosByCategory(category));
   };
-  const categories = Object.keys(todosByCategory); // Obtenir les noms des catégories (clés de l'objet)
+  const categories = Object.keys(todosByCategory).filter(category => category !== 'undefined'); // Obtenir les noms des catégories (clés de l'objet)
   return (
     <>
       <div
@@ -39,7 +39,7 @@ export default function Sauvegarde() {
           {categories.length > 0 ? (
             categories.map((category) => (
               <Box key={category} sx={{ marginBottom: "40px", width: "100%", maxWidth: "800px" }}>
-                <Typography variant="h4" sx={{ color: 'white', textAlign: 'center', marginBottom: '20px' }}>
+                <Typography variant="h4" sx={{ color: 'brown', textAlign: 'center', marginBottom: '20px' }}>
                   {category}
                 </Typography>
                 {todosByCategory[category].length > 0 ? (

@@ -14,9 +14,10 @@ export const todoSlice = createSlice({
   reducers: {
     addTodo: (state, action) => {
       const { category, todo } = action.payload; // Vérifier que l'action contient bien la catégorie et le todo
-      if (!state.todos[category]) {
-        state.todos[category] = []; // Initialiser la catégorie si elle n'existe pas
-      }
+      if (!category || !state.todos[category]) {
+    return; // Ne rien faire si la catégorie est undefined ou n'existe pas
+  }
+      
       state.todos[category].push(todo); // Ajouter le todo à la catégorie correspondante
     },
     removeTodo: (state, action) => {
