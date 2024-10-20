@@ -13,6 +13,7 @@ import { addTodo } from "../features/todoSlice";
 export default function Ecole() {
   const [todos, setTodos] = useState([]); //liste des todos 
   const [todo, setTodo] = useState("")  //to do en cours d'écriture
+  const category="ecole"
   const dispatch=useDispatch()
 
   const handleAdd = () => {
@@ -42,7 +43,7 @@ export default function Ecole() {
     if (todos.length > 0) {
       // Enregistrer chaque todo dans le reducer
       todos.forEach((item) => {
-        dispatch(addTodo(item)); // Ajouter le todo dans le reducer
+        dispatch(addTodo({ todo: item, category }));  // Ajouter le todo avec la catégorie
       });
 toast.success(toastMessages.success.todoSaved)
 setTodos([]); // Réinitialiser la liste des todos après la sauvegarde
