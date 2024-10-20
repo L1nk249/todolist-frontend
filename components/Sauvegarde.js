@@ -30,7 +30,7 @@ export default function Sauvegarde() {
         {/* Contenu principal entre le header et le footer */}
         <Box 
           display="flex" 
-          flexDirection="column" 
+          flexDirection="row" 
           alignItems="center" 
           justifyContent="center" 
           flexGrow={1} // Permet à cette section d'occuper l'espace restant
@@ -38,8 +38,10 @@ export default function Sauvegarde() {
         >
           {categories.length > 0 ? (
             categories.map((category) => (
-              <Box key={category} sx={{ marginBottom: "40px", width: "100%", maxWidth: "800px" }}>
-                <Typography variant="h4" sx={{ color: 'brown', textAlign: 'center', marginBottom: '20px' }}>
+              <Box key={category} sx={{  display:"flex",
+                flexDirection: 'column', 
+                alignItems: 'center',marginBottom: "45vh", width: "100%", maxWidth: "800px" }}>
+                <Typography variant="h4" sx={{ color: '#E6952B', fontWeight: 'bold', textAlign: 'center',fontSize:"3rem", marginBottom: '20px' }}>
                   {category}
                 </Typography>
                 {todosByCategory[category].length > 0 ? (
@@ -54,6 +56,7 @@ export default function Sauvegarde() {
                       margin: "10px 0",
                       width: "100%",
                       textAlign: "center",
+                     
                     }}>
                       {todo}
                     </Box>
@@ -65,16 +68,15 @@ export default function Sauvegarde() {
                 )}
                 <Button 
                   variant="contained" 
-                  color="secondary" 
-                  sx={{ marginTop: '20px' }}
+                  sx={{ backgroundColor: '#850D27', marginTop: '50px' }}
                   onClick={() => handleRemoveAllTodos(category)}
                 >
-                  Supprimer tous les Todos de {category}
+                  Supprimer tous les Todos 
                 </Button>
               </Box>
             ))
           ) : (
-            <Box sx={{ color: 'white', fontSize: '3rem', textAlign: 'center' }}>
+            <Box sx={{ color: 'white', fontSize: '8rem', textAlign: 'center' }}>
               Aucun Todo enregistré.
             </Box>
           )}
