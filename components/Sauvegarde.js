@@ -2,7 +2,8 @@
 
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box,Typography,Button } from '@mui/material';
+import { Box,Typography,Button, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { removeAllTodosByCategory, selectTodos } from '../features/todoSlice'; // Assurez-vous d'importer votre sélecteur de todos
 
 
@@ -38,42 +39,54 @@ export default function Sauvegarde() {
         >
           {categories.length > 0 ? (
             categories.map((category) => (
-              <Box key={category} sx={{  display:"flex",
-                flexDirection: 'column', 
-                alignItems: 'center',marginBottom: "45vh", width: "100%", maxWidth: "800px" }}>
-                <Typography variant="h4" sx={{ color: '#E6952B', fontWeight: 'bold', textAlign: 'center',fontSize:"3rem", marginBottom: '20px' }}>
-                  {category}
-                </Typography>
-                {todosByCategory[category].length > 0 ? (
-                  todosByCategory[category].map((todo, index) => (
-                    <Box key={index} sx={{
-                      background: "#E67753",
-                      color: "white",
-                      padding: "10px 20px",
-                      borderRadius: "25px",
-                      fontSize: "1.5rem",
-                      boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-                      margin: "10px 0",
-                      width: "100%",
-                      textAlign: "center",
-                     
-                    }}>
-                      {todo}
-                    </Box>
-                  ))
-                ) : (
-                  <Typography variant="body1" sx={{ color: 'white', textAlign: 'center' }}>
-                    Aucun todo dans cette catégorie.
-                  </Typography>
-                )}
-                <Button 
-                  variant="contained" 
-                  sx={{ backgroundColor: '#850D27', marginTop: '50px' }}
-                  onClick={() => handleRemoveAllTodos(category)}
+              <Accordion key={category} sx={{ maxWidth: '800px', width: '100%', marginBottom: '20px',padding:"20px" }}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon sx={{ color: 'white' }} />}
+                  aria-controls={`panel-${category}-content`}
+                  id={`panel-${category}-header`}
+                  sx={{ backgroundColor: '#E6952B', color: 'white' }}
                 >
-                  Supprimer tous les Todos 
-                </Button>
-              </Box>
+                  <Typography variant="h4" sx={{ fontWeight: 'bold', fontSize: '1.8rem' }}>
+                    {category}
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails sx={{ backgroundColor: '#333', color: 'white' }}>
+                  {todosByCategory[category].length > 0 ? (
+                    todosByCategory[category].map((todo, index) => (
+                      <Box
+                        key={index}
+                        sx={{
+                         
+                          background: "#E67753",
+                          color: "white",
+                          padding: "10px 20px",
+                          borderRadius: "25px",
+                          fontSize: "1.5rem",
+                          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                          margin: "10px 0",
+                          width: "80%",
+                          textAlign: "center",
+                          marginLeft: "auto", // Centre horizontalement
+                          marginRight: "auto", // Centre horizontalement
+                        }}
+                      >
+                        {todo}
+                      </Box>
+                    ))
+                  ) : (
+                    <Typography variant="body1" sx={{ color: 'white', textAlign: 'center' }}>
+                      Aucun todo dans cette catégorie.
+                    </Typography>
+                  )}
+                  <Button
+                    variant="contained"
+                    sx={{ backgroundColor: '#850D27', marginTop: '20px' }}
+                    onClick={() => handleRemoveAllTodos(category)}
+                  >
+                    Supprimer tous les Todos
+                  </Button>
+                </AccordionDetails>
+              </Accordion>
             ))
           ) : (
             <Box sx={{ color: 'white', fontSize: '8rem', textAlign: 'center' }}>
@@ -81,8 +94,6 @@ export default function Sauvegarde() {
             </Box>
           )}
         </Box>
-        
       </div>
     </>
-  );
-}
+  )}
