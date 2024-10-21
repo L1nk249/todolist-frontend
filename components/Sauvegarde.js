@@ -15,6 +15,12 @@ export default function Sauvegarde() {
     dispatch(removeAllTodosByCategory(category));
   };
   const categories = Object.keys(todosByCategory).filter(category => category !== 'undefined'); // Obtenir les noms des catégories (clés de l'objet)
+  const categoryColors={
+    sport: "#902F66",
+  courses: "#996868",
+ecole: "#CE5E5E",
+  bricolage:'#E67753',
+  }
   return (
     <>
       <div
@@ -44,7 +50,7 @@ export default function Sauvegarde() {
                   expandIcon={<ExpandMoreIcon sx={{ color: 'white' }} />}
                   aria-controls={`panel-${category}-content`}
                   id={`panel-${category}-header`}
-                  sx={{ backgroundColor: '#E6952B', color: 'white' }}
+                  sx={{ backgroundColor:categoryColors[category] , color: 'white' }}
                 >
                   <Typography variant="h4" sx={{ fontWeight: 'bold', fontSize: '1.8rem' }}>
                     {category}
@@ -57,7 +63,7 @@ export default function Sauvegarde() {
                         key={index}
                         sx={{
                          
-                          background: "#E67753",
+                          background: categoryColors[category] ,
                           color: "white",
                           padding: "10px 20px",
                           borderRadius: "25px",
