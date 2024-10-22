@@ -42,7 +42,7 @@ export default function Sport() {
   };
   const handleSave=()=>{
     if (todos.length > 0) {
-      // Enregistrer chaque todo 
+      // Enregistrer chaque todo dans le reducer
       todos.forEach((item) => {
         dispatch(addTodo({ todo: item, category }));  // Ajouter le todo avec la catégorie
       });
