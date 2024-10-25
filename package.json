@@ -22,7 +22,7 @@
     "react-toastify": "^10.0.5",
     "redux-persist": "^6.0.0",
     "swal": "^0.1.0",
-    "sweetalert2": "^11.14.1"
+    "sweetalert2": "^11.14.4"
   },
   "devDependencies": {
     "eslint": "^8",
