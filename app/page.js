@@ -124,7 +124,7 @@ return (
                           fontSize: "1.5rem",
                           boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // Légère ombre pour un effet de relief
                           minWidth: "800px", // Largeur minimum pour la capsule
-                          maxWidth: "800px", // Largeur maximum
+                          maxWidth: "800px", // Largeur max
                           width: "100%", // Ajuste la largeur au contenu
                         }}
                       >
