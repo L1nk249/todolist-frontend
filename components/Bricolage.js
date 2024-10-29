@@ -32,7 +32,7 @@ export default function Bricolage() {
       toast.info(toastMessages.info.endOfTodos)
       
   
-     } else {setTodos((prev) => [...prev, todo]);// si todo pas superieur à 29 alors rajoute les todos à la liste et réinitialise le champ de saisie.
+     } else {setTodos((prev) => [...prev, todo]);// si todo pas < à 29 alors rajoute les todos à la liste et réinitialise le champ de saisie.
       setTodo("");}
      }
 
