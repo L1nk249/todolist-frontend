@@ -70,7 +70,7 @@ return (
         backgroundPosition: 'center', // centre l'image
         minHeight: '100vh',
         position: 'absolute', // permet de superposer avec le contenu
-        width: '100%', // prend toute la largeur
+        width: '100%', // prend toutela largeur
         zIndex: -1, // met l'image en arrière-plan
       }}
     >
