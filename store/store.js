@@ -11,7 +11,7 @@ const persistConfig = {
   storage, // Utilise localStorage pour stocker l'état
 }
 
-  const rootReducer = combineReducers({
+  const rootReducer = combineReducers({//
     user: userReducer,
     todo: todoReducer,
   })
