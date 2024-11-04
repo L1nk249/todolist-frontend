@@ -21,7 +21,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // Configurer le store avec le reducer persistant
 export const store = configureStore({
-  reducer: persistedReducer, // Utilise le reducer persistant
+  reducer: persistedReducer, // Utilise le redux persistant
   devTools: process.env.NODE_ENV !== 'production', // Outils de développement seulement en mode développement
 });
 
