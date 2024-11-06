@@ -25,7 +25,7 @@ export const store = configureStore({
   devTools: process.env.NODE_ENV !== 'production', // Outils de développement seulement en mode développement
 });
 
-// Créer un redcer persistor
+// Créer un reducer persistor
 export const persistor = persistStore(store); // Exporter le persistor
 
 export default store;
