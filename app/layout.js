@@ -10,6 +10,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from '../theme/theme'
 
 export default function RootLayout({ children }) {
+  // toast config for all the app
   const toastOptions = {
     style: { 
       fontSize: '2rem', 
@@ -20,6 +21,8 @@ export default function RootLayout({ children }) {
     autoClose: 2000,
     hideProgressBar: true,
   };
+
+  
   return (
     <html lang="fr">
       <body>
