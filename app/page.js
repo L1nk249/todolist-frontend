@@ -11,7 +11,7 @@ import toastMessages from "../config/toastMessages";
 export default function Home() {
   const [todos, setTodos] = useState([]); //liste des todos 
   const [todo, setTodo] = useState("")  //to do en cours d'écriture
-  const [openModal, setOpenModal] = useState(false); // Gérer la visibilité de la modale (Connexion)
+  const [openModal, setOpenModal] = useState(false); // Gére la visibilité de la modale (Connexion)
 
   const handleAdd = () => {
     if (todo.trim() === '') {// .trim()  valide les saisies utilisateur, pour éviter que des espaces ne soient pris en compte comme des caractères valides. trim()==='' alors tt est vide.
