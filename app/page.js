@@ -42,7 +42,7 @@ export default function Home() {
     toast.info(toastMessages.info.deletedTodo)
   };
   const closeModal = () => {
-    setOpenModal(false); // ferme la modal l
+    setOpenModal(false); // ferme la modal 
   };
 return (
         <>
