@@ -19,7 +19,7 @@ export default function Home() {
       return;
     }
     
-    if (todos.includes(todo)) {
+    if (todos.includes(todo)) {// si le todo corespond à un todo existant alors error
       toast.warning(toastMessages.warning.existingTodo)
        
       return;
